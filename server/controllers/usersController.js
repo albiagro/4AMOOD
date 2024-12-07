@@ -17,12 +17,12 @@ module.exports = function (app) {
   app.post("/users/login", jsonParser, async function (req, res) {
     const { username, password } = req.body;
   if (!(username && password)) {
-    return res.status(400).json({ message: "All input is required" });
+    return res.status(400).json({ message: "All input is required!" });
   }
   const user = await DBModels.User.findOne({ username });
-  
-  if (!(user && (bcrypt.compare(password, user.password)))) {
-    return res.status(404).json({ message: "Invalid credentials" });
+
+  if (!(user && (await bcrypt.compare(password, user.password)))) {
+    return res.status(404).json({ message: "Invalid credentials!" });
   }
   const token = createSecretToken(user._id);
   const userLogged = {
@@ -35,11 +35,21 @@ module.exports = function (app) {
 
   app.post("/users", jsonParser, async function (req, res) {
 
+    if (!(req.body.name && req.body.surname && req.body.sex && req.body.username && req.body.email && req.body.password)) {
+      return res.status(400).json({ message: "All input is required!" });
+    }
+
     try {
       const oldUser = await DBModels.User.findOne({ username: req.body.username });
 
     if (oldUser) {
-      return res.status(409).send("User already exists! Please login");
+      return res.status(409).json({ message: "User already exists! Please login." });
+    }
+      
+    const userWithSameEmail = await DBModels.User.findOne({ email: req.body.email });
+
+    if (userWithSameEmail) {
+      return res.status(409).json({ message: "E-mail already used!" })
     }
 
     const salt = 10;
@@ -47,6 +57,7 @@ module.exports = function (app) {
     const newUser = new DBModels.User({
       name: req.body.name,
       surname: req.body.surname,
+      sex: req.body.sex,
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
@@ -66,6 +77,26 @@ module.exports = function (app) {
     } 
   });
 
+  app.put("/users", jsonParser, async function (req, res) {
+
+    try {
+
+    const userWithSameEmail = await DBModels.User.findOne({ email: req.body.email });
+
+    if (userWithSameEmail) {
+      return res.status(409).json({ message: "E-mail already used!" })
+    }
+
+    const salt = 10;
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    await DBModels.User.findOneAndUpdate({username: req.body.username}, {name: req.body.name, surname: req.body.surname, password: hashedPassword, email: req.body.email})
+
+    } catch (error) {
+      console.log("Error while updating user: " + error)
+    } 
+  });
+
   app.get('/user', async (req, res) => {
     const token = req.header('Authorization').split(' ')[1]
 
@@ -73,12 +104,18 @@ module.exports = function (app) {
         const decode = jwt.verify(token, process.env.TOKEN_KEY);
         const user = await DBModels.User.findById({ _id: decode.id });
 
-        const userVerified = {
-          ...user._doc,
-          token: token
+        if (user !== null) {
+          const userVerified = {
+            ...user._doc,
+            token: token
+          }
+  
+          res.json(userVerified);
         }
-
-        res.json(userVerified);
+        else {
+          res.json(null)
+        }
+        
     }else{
         res.json(null);
     }

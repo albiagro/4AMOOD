@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
-import logo from '../img/mylogo.gif';
 import '../App.css';
+import { Button } from 'react-bootstrap';
 
 
 export const Intro = ( {setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}  ) => {
@@ -12,8 +12,7 @@ export const Intro = ( {setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
   return (
     <div className="introImage">
-        <img className= "introLogo" src={logo} alt="logo" />
-        <p><a href= '/home'>Let's start</a></p>
+        <Button href='/home' id='btnIntro'>Let's start</Button>
     </div>
   );
 }

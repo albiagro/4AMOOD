@@ -24,8 +24,7 @@
   color:#bcf2ff;
 }
 
-img {
-  font-size: 15px;
+#avatar {
   border-radius: 50%;
 }
 
@@ -35,7 +34,7 @@ img {
   width: 100%;
 }
 
-button {
+#btnLogOut {
   height: 30px;
 }
 
@@ -43,4 +42,51 @@ button {
   display:flex;
   padding-top: 2%;
   gap: 10px;
+}
+
+.errorLabel {
+  color: red;
+}
+
+.card {
+  width: 80%;
+  margin: auto;
+}
+
+.introImage{
+  background-image: url("./img/intro.gif");
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+}
+
+#btnIntro {
+  position:absolute; 
+   margin-left:-50px;
+   left:50%;
+   width:100px;
+   bottom:20px;
+}
+
+form label{
+  color: #fff;
+}
+
+form {
+  width: 70%;
+  margin:auto;
+}
+
+
+@media screen and (max-width: 500px) {
+
+  .introImage {
+    background-image: url("./img/intro.gif");
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position:center;
+  }
+  
+
+  
 }

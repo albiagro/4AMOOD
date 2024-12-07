@@ -6,8 +6,9 @@ import { Home } from './pages/home';
 import {MyNavBar} from './components/navbar'
 import { Login } from './pages/login';
 import { Register } from './pages/register';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from './store/reducers/auth';
+import { User } from './pages/user';
 
 function App() {
 
@@ -18,6 +19,10 @@ function App() {
     dispatch(getCurrentUser());
   }, [dispatch])
 
+  const auth = useSelector((state: any) => state.auth)
+
+  //TODO: when user is logged out, redirect to home - now route is not triggered because it exists only if user is logged in!
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,6 +32,8 @@ function App() {
           <Route path="/home" element={<Home setShowNavbar={setShowNavbar} />} />
           <Route path="/login" element={<Login setShowNavbar={setShowNavbar} />} />
           <Route path="/register" element={<Register setShowNavbar={setShowNavbar} />} />
+          <Route path={`/user/${auth.currentUser?.username}`} element={<User setShowNavbar={setShowNavbar} />} /> 
+          <Route path="*" element={<Home setShowNavbar={setShowNavbar} />} />
         </Routes>
       </BrowserRouter>
     </div>

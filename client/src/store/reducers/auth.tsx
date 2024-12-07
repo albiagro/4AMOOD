@@ -7,13 +7,26 @@ export type SliceState = { isLoading: boolean; currentUser?: string | null};
 const initialState: SliceState = { isLoading: false };
 
 type ReturnedType = any // The type of the return of the thunk
-type ThunkArgRegistration = { name: string, surname: string, username: string, password: string, email: string } 
+type ThunkArgRegistration = { name: string, surname: string, sex: string,  username: string, password: string, email: string } 
+type ThunkArgUpdateData = { username: string, name: string, surname: string, password: string, email: string } 
 type ThunkArgLogin = { username: string, password: string} 
 
 export const register = createAsyncThunk<ReturnedType, ThunkArgRegistration>('auth/register', async (userData, thunkAPI) => {
         
     try {
         const response = await axios.post('/users', {
+            ...userData,
+        })
+        return response.data
+    } catch (error : any) {
+        return thunkAPI.rejectWithValue(error.response.data.message)
+    }
+})
+
+export const updateUser = createAsyncThunk<ReturnedType, ThunkArgUpdateData>('auth/update', async (userData, thunkAPI) => {
+        
+    try {
+        const response = await axios.put('/users', {
             ...userData,
         })
         return response.data
@@ -68,6 +81,16 @@ const authSlice = createSlice({
         state.currentUser = action.payload
     })
     .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+    })
+    .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+    })
+    .addCase(updateUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.currentUser = action.payload
+    })
+    .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
     })
     .addCase(login.pending, (state) => {
