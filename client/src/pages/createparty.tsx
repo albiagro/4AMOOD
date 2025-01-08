@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container } from "react-bootstrap";
-import axios from "axios";
 import { Footer } from "../components/footer";
 import { IGuest } from "./myparties";
+import api from "../axios";
 
 export const CreateParty = ({
   setShowNavbar,
@@ -70,7 +70,7 @@ export const CreateParty = ({
     var response
     
     try {
-      response = await axios.post('/parties', {
+      response = await api.post('/parties', {
         ...partyData
     })
   

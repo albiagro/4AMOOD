@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Alert, Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Party } from "../components/party";
 import { Footer } from "../components/footer";
+import api from "../axios";
 
 export interface IParty {
   _id: String;
@@ -59,7 +59,7 @@ export const MyParties = ({
 
   const getPartiesOrganizedByMe = () => {
     setLoading(true);
-    axios({
+    api({
       method: "get",
       url: urlOrganizedByMe,
       responseType: "json",
@@ -73,7 +73,7 @@ export const MyParties = ({
 
   const getPartiesIWillPartecipate = () => {
     setLoading(true);
-    axios({
+    api({
       method: "get",
       url: urlMeAsAGuest,
       responseType: "json",

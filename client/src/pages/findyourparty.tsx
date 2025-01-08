@@ -1,10 +1,10 @@
 import React, { useLayoutEffect, useState} from 'react';
 import { Button, Col, Container, Form, FormGroup, Row, Spinner } from 'react-bootstrap';
-import axios from 'axios';
 import { IGuest, IParty } from './myparties';
 import { useSelector } from 'react-redux';
 import { Party } from '../components/party';
 import { Footer } from '../components/footer';
+import api from '../axios';
 
 export const FindYourParty = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -45,7 +45,7 @@ export const FindYourParty = ({setShowNavbar} : {setShowNavbar : React.Dispatch<
 
     const url = `/parties?currentUser=${auth.currentUser?.username}&minLat=${boundingBox.minLat}&maxLat=${boundingBox.maxLat}&minLon=${boundingBox.minLon}&maxLon=${boundingBox.maxLon}&date=${date}`
 
-    axios({
+    api({
       method: "get",
       url: url,
       responseType: "json",

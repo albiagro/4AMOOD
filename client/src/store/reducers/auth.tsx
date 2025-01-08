@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import axios from "axios"
+import api from "../../axios";
 
 
 export type SliceState = { isLoading: boolean; currentUser?: string | null};
@@ -14,7 +14,7 @@ type ThunkArgLogin = { username: string, password: string}
 export const register = createAsyncThunk<ReturnedType, ThunkArgRegistration>('auth/register', async (userData, thunkAPI) => {
         
     try {
-        const response = await axios.post('/users', {
+        const response = await api.post('/users', {
             ...userData,
         })
         return response.data
@@ -26,7 +26,7 @@ export const register = createAsyncThunk<ReturnedType, ThunkArgRegistration>('au
 export const updateUser = createAsyncThunk<ReturnedType, ThunkArgUpdateData>('auth/update', async (userData, thunkAPI) => {
         
     try {
-        const response = await axios.put('/users', {
+        const response = await api.put('/users', {
             ...userData,
         })
         return response.data
@@ -38,7 +38,7 @@ export const updateUser = createAsyncThunk<ReturnedType, ThunkArgUpdateData>('au
 export const login = createAsyncThunk<ReturnedType, ThunkArgLogin>('auth/login', async (userData, thunkAPI) => {
         
     try {
-        const response = await axios.post('/users/login', {
+        const response = await api.post('/users/login', {
             ...userData,
         })
         return response.data
@@ -51,7 +51,7 @@ export const getCurrentUser = createAsyncThunk<any, void>('auth/getCurrentUser',
         
     try {
         const token = localStorage.getItem('accessToken') ?? ''
-        const response = await axios.get('/user', {
+        const response = await api.get('/user', {
             headers : {
                 Authorization: `Token ${token}`
             }

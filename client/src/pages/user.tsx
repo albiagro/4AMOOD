@@ -8,6 +8,7 @@ import { updateUser } from '../store/reducers/auth';
 import { Footer } from '../components/footer';
 import { INotification } from './myparties';
 import axios from 'axios';
+import api from '../axios';
 
 export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -34,7 +35,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     }, []);
 
   const getNotification = () => {
-    axios({
+    api({
       method: "get",
       url: `/notifications?user=${auth.currentUser?.username}`,
       responseType: "json",
@@ -75,7 +76,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
   console.log(notificationsList)
 
   const setNotificationRead = (notification : INotification) => {
-    axios({
+    api({
       method: "put",
       url: `/notifications?ID=${notification._id}`,
       data: {messageRead : true}
@@ -98,17 +99,17 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     }
 
     axios.all([        
-      axios({
+      api({
         method: "put",
         url: `/parties?partyID=${notification.partyID}`,
         data: {guest: notification.userToBeAccepted, toAccept: true}
       }),
-      axios({
+      api({
         method: "put",
         url: `/notifications?ID=${notification._id}`,
         data: {messageRead : true}
       }),
-      axios({
+      api({
         method: "post",
         url: `/notifications`,
         data: newNotification
@@ -132,17 +133,17 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     }
 
     axios.all([        
-      axios({
+      api({
         method: "put",
         url: `/parties?partyID=${notification.partyID}`,
         data: {guest: notification.userToBeAccepted, toAccept: false}
       }),
-      axios({
+      api({
         method: "put",
         url: `/notifications?ID=${notification._id}`,
         data: {messageRead : true}
       }),
-      axios({
+      api({
         method: "post",
         url: `/notifications`,
         data: newNotification

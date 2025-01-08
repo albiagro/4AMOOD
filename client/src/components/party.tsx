@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import partyImg from '../img/party.jpg'
+import api from '../axios';
 
 interface Props {
     party: IParty,
@@ -31,7 +32,7 @@ export const Party = (props: Props) => {
       accepted: true
     }
 
-    axios({
+    api({
       method: "put",
       url: `/parties?partyID=${party._id}`,
       data: {guest: guest, add: true}
@@ -44,7 +45,7 @@ export const Party = (props: Props) => {
 
     setPartecipateState(false)
     
-    axios({
+    api({
       method: "put",
       url: `/parties?partyID=${party._id}`,
       data: {guest: auth.currentUser.username, add: false}
@@ -75,12 +76,12 @@ export const Party = (props: Props) => {
       }
 
       axios.all([        
-        axios({
+        api({
           method: "put",
           url: `/parties?partyID=${party._id}`,
           data: {guest: guest, add: true}
         }),
-        axios({
+        api({
           method: "post",
           url: `/notifications`,
           data: newNotification
@@ -90,7 +91,7 @@ export const Party = (props: Props) => {
   };
 
   const cancelParty = () => {
-    axios({
+    api({
       method: "put",
       url: `/parties?partyID=${party._id}`,
       data: {state: "canceled"}

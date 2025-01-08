@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
 import { INotification } from '../pages/myparties';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../axios';
 
 export const UserBadge = () => {
 
@@ -17,7 +17,7 @@ export const UserBadge = () => {
     }, []);
 
   const getNotification = () => {
-    axios({
+    api({
       method: "get",
       url: `/notifications?user=${auth.currentUser?.username}`,
       responseType: "json",

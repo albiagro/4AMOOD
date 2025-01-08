@@ -1,8 +1,8 @@
 import Alert from 'react-bootstrap/Alert';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 function AdditionalContentExample() {
-    const auth = useSelector((state: any) => state.auth);
+    // const auth = useSelector((state: any) => state.auth);
 
   return (
     <Alert variant="primary">
