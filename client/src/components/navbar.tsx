@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Logo } from "./logo";
 import { Avatar } from "./avatar";
+import {UserBadge} from "./userBadge"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,16 +34,24 @@ export const MyNavBar = () => {
             <Nav.Link href="/home">
               <p className="links"> Home </p>
             </Nav.Link>
-            {auth.currentUser === null && (
+            {auth.currentUser === null ? 
               <>
                 <Nav.Link href="/login">
                   <p className="links"> Login </p>
                 </Nav.Link>
                 <Nav.Link href="/register">
                   <p className="links"> Register </p>
-                </Nav.Link>{" "}
-              </>
-            )}
+                </Nav.Link>
+              </> :
+              <>
+              <Nav.Link href="/findyourparty">
+              <p className="links"> Find your party </p>
+            </Nav.Link>
+            <Nav.Link href="/myparties">
+              <p className="links"> My parties </p>
+            </Nav.Link>
+            </>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -52,8 +61,9 @@ export const MyNavBar = () => {
             <Nav className="ms-auto" style={{ maxHeight: "100px" }}>
               <div className="avatarAndSignOut">
                 <Avatar />
+                <UserBadge/>
                 <Button
-                  id="btnLogOut"
+                  className='userBtn'
                   variant="primary"
                   size="sm"
                   onClick={signUserOut}

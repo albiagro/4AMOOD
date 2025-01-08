@@ -9,6 +9,9 @@ import { Register } from './pages/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from './store/reducers/auth';
 import { User } from './pages/user';
+import { FindYourParty } from './pages/findyourparty';
+import { MyParties } from './pages/myparties';
+import { CreateParty } from './pages/createparty';
 
 function App() {
 
@@ -33,6 +36,9 @@ function App() {
           <Route path="/login" element={<Login setShowNavbar={setShowNavbar} />} />
           <Route path="/register" element={<Register setShowNavbar={setShowNavbar} />} />
           <Route path={`/user/${auth.currentUser?.username}`} element={<User setShowNavbar={setShowNavbar} />} /> 
+          {auth.currentUser && <><Route path="/myparties" element={<MyParties setShowNavbar={setShowNavbar} />} /> </> }
+          {auth.currentUser && <><Route path="/createparty" element={<CreateParty setShowNavbar={setShowNavbar} />} /> </> }
+          {auth.currentUser && <><Route path="/findyourparty" element={<FindYourParty setShowNavbar={setShowNavbar} />} /> </> }
           <Route path="*" element={<Home setShowNavbar={setShowNavbar} />} />
         </Routes>
       </BrowserRouter>

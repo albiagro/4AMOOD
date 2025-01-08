@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+* {
+  font-family: "Quicksand", serif;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
+  text-align: center;  
+}
+
+.backgroundContainer {
+  background-image: url("./img/background.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
 }
 
 .introImage {
@@ -28,14 +43,21 @@
   border-radius: 50%;
 }
 
-.background {
-  background-image: url('./img/background.png');
-  height: 100vh;
-  width: 100%;
+.userBtn {
+  height: 30px;
 }
 
-#btnLogOut {
-  height: 30px;
+#footerNav {
+  background-image: linear-gradient(to bottom, #23262D 0%, #23262D 100%);
+}
+
+.text-footer {
+  font-size: 12px;
+  color:#bcf2ff;
+}
+
+.title-footer {
+  color:#bcf2ff;
 }
 
 .avatarAndSignOut {
@@ -77,6 +99,29 @@ form {
   margin:auto;
 }
 
+#alert2 {
+  margin-top: 2%;
+}
+
+.btnPartecipate {
+  margin-left: 2%;
+}
+
+.separator {
+  width: 2%;
+}
+
+@media screen and (min-width: 500px) {
+
+.userCard {
+  width: 60%;
+}
+
+.notificationCard {
+  width: 90%;
+}
+
+}
 
 @media screen and (max-width: 500px) {
 
@@ -86,7 +131,13 @@ form {
     background-size:contain;
     background-position:center;
   }
-  
 
+  .userCard {
+    width: 100%;
+  }
+  
+  .notificationCard {
+    width: 100%;
+  }
   
 }

@@ -5,11 +5,39 @@ var userSchema = new mongoose.Schema({
     name: String,
     surname: String,
     sex: String,
+    birthday: Date,
     username: String,
     password: String,
     email: String
 });
 
-var User = mongoose.model('User', userSchema)
+//Party schema and model
+var partySchema = new mongoose.Schema({
+    userOrganizer : String,
+    description: String,
+    mood: String,
+    category: String,
+    latitude: String,
+    longitude: String,
+    date: Date,    
+    privateParty: Boolean,
+    guests: Array,
+    state: String
+});
 
-module.exports = { User}
+//Notification schema and model
+var notificationSchema = new mongoose.Schema({
+    userOwner: String,
+    datetime: Date,
+    message: String,
+    invite: Boolean,
+    partyID: String,
+    userToBeAccepted: String,
+    read: Boolean
+});
+
+var User = mongoose.model('User', userSchema)
+var Party = mongoose.model('Party', partySchema)
+var Notification = mongoose.model('Notification', notificationSchema)
+
+module.exports = { User, Party, Notification}

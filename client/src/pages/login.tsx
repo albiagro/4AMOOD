@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/reducers/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
+import { Footer } from "../components/footer";
 
 export const Login = ({
   setShowNavbar,
@@ -39,13 +40,13 @@ export const Login = ({
 
   return (
     <div>
+      <div className="backgroundContainer">
       {/* If user is logged in, redirect to homepage */}
       {auth.currentUser && (
         <>
           <Navigate to="/home"></Navigate>
         </>
       )}
-      <div className="background">
       <Form onSubmit={onLogin} id="formLogin">
       <Form.Group className="mb-3" controlId="loginData">
       <Form.Label>Username</Form.Label>
@@ -59,7 +60,8 @@ export const Login = ({
       </Button>  
     </Form>
     <Form.Label className="errorLabel">{error}</Form.Label>
-      </div>
+    </div>
+      <Footer />
     </div>
   );
 };

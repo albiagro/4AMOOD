@@ -1,6 +1,7 @@
 var express = require('express');
 var usersController = require('./controllers/usersController');
 const env = require("dotenv");
+const partiesController = require('./controllers/partiesController');
 env.config();
 
 var app = express();
@@ -11,6 +12,7 @@ app.use(express.static('./public'));
 
 //fire controller
 usersController(app);
+partiesController(app);
 
 //listen to port
 app.listen(5000);

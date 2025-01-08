@@ -7,7 +7,7 @@ export type SliceState = { isLoading: boolean; currentUser?: string | null};
 const initialState: SliceState = { isLoading: false };
 
 type ReturnedType = any // The type of the return of the thunk
-type ThunkArgRegistration = { name: string, surname: string, sex: string,  username: string, password: string, email: string } 
+type ThunkArgRegistration = { name: string, surname: string, sex: string,  birthday: string, username: string, password: string, email: string } 
 type ThunkArgUpdateData = { username: string, name: string, surname: string, password: string, email: string } 
 type ThunkArgLogin = { username: string, password: string} 
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/reducers/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import { Footer } from "../components/footer";
 
 export const Register = ({
   setShowNavbar,
@@ -21,6 +22,7 @@ export const Register = ({
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [sex, setSex] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +32,7 @@ export const Register = ({
 
   const onRegister = (e: any) => {
     e.preventDefault();
-    dispatch(register({ name, surname, sex, username, password, email })).then(
+    dispatch(register({ name, surname, sex, birthday, username, password, email })).then(
       (action: any) => {
         if (action.error === null || action.error === undefined) {
           localStorage.setItem("accessToken", action.payload.token);
@@ -44,19 +46,21 @@ export const Register = ({
 
   return (
     <div>
-      {/* If use is logged in, redirect to homepage */}
+      <div className="backgroundContainer">
+      {/* If user is logged in, redirect to homepage */}
       {auth.currentUser && (
         <>
           <Navigate to="/home"></Navigate>
         </>
       )}
-      <div className="background">
       <Form onSubmit={onRegister}>
       <Form.Group className="mb-3" controlId="personalData">
         <Form.Label>Name</Form.Label>
         <Form.Control type="input" placeholder="Enter name" onChange={(e) => setName(e.target.value)}/>
         <Form.Label>Surname</Form.Label>
-        <Form.Control type="input" placeholder="Enter surname" onChange={(e) => setSurname(e.target.value)}/>      
+        <Form.Control type="input" placeholder="Enter surname" onChange={(e) => setSurname(e.target.value)}/>
+        <Form.Label>Your birthday</Form.Label>
+        <Form.Control type="date" onChange={(e) => setBirthday(e.target.value)}/>      
       </Form.Group>  
       <Form.Group className="mb-2" controlId="sexData">
         <Form.Check name="sex" inline type="radio" label="M" onChange={(e) => e.target.value ? setSex("M") : setSex("")}/>
@@ -81,7 +85,8 @@ export const Register = ({
       </Button>  
     </Form>
     <Form.Label className="errorLabel">{error}</Form.Label>
-      </div>
+    </div>
+      <Footer />
     </div>
   );
 };
