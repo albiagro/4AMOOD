@@ -12,6 +12,7 @@ import { User } from './pages/user';
 import { FindYourParty } from './pages/findyourparty';
 import { MyParties } from './pages/myparties';
 import { CreateParty } from './pages/createparty';
+import { PartyDetails } from './pages/partydetails';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
           {auth.currentUser && <><Route path="/myparties" element={<MyParties setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/createparty" element={<CreateParty setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/findyourparty" element={<FindYourParty setShowNavbar={setShowNavbar} />} /> </> }
+          {auth.currentUser && <><Route path="/parties/*" element={<PartyDetails setShowNavbar={setShowNavbar} />} /> </> }
           <Route path="*" element={<Home setShowNavbar={setShowNavbar} />} />
         </Routes>
       </BrowserRouter>

@@ -74,6 +74,16 @@ module.exports = function (app) {
     }     
   });
 
+  app.get("/parties/:id", urlencodedParser, async function (req, res) {
+
+    const partyID = req.params.id;
+
+    const data = await DBModels.Party.findById(partyID);
+
+    res.json(data);
+    
+  });
+
   app.put("/parties", jsonParser, async function (req, res) {
 
     const partyID = req.query.partyID

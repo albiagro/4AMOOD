@@ -184,7 +184,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
         <Form.Text className="text-muted">
         </Form.Text>
       </Form.Group>  
-      <Button className="btnUser" onClick={() => switchEditMode()}> {buttonDescription} </Button>
+      <Button className="btnUser" onClick={() => switchEditMode()}> {buttonDescription} </Button><span className='separator'> </span>
       {editMode && <><Button className="btnUser" variant="primary" type="submit">
         Submit
       </Button></>}     

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import partyImg from '../img/party.jpg'
 import api from '../axios';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     party: IParty,
@@ -18,6 +19,8 @@ export const Party = (props: Props) => {
   const { party } = props;
   const [partecipateState, setPartecipateState] = useState(props.partecipating);
   const [pendingState, setPendingState] = useState(props.userToBeAccepted);
+
+  const navigate = useNavigate();
 
   const auth = useSelector((state: any) => state.auth);
 
@@ -100,6 +103,10 @@ export const Party = (props: Props) => {
     window.location.reload()
   }
 
+  const openPartyDetails = () => {
+    navigate(`/parties/${party._id}`, {state:{partyID: party._id}})
+  }
+
   var button 
   
   if (party.privateParty) {
@@ -162,7 +169,7 @@ export const Party = (props: Props) => {
         </Card.Text>        
         {!props.organizedByMe && button}
         <br />
-        <Button variant="primary">More details</Button>
+        <Button onClick={() => openPartyDetails()} variant="primary">More details</Button>
         {props.organizedByMe && <><span className='separator'> </span><Button onClick={() => cancelParty()} variant="outline-danger">Delete</Button></>}
       </Card.Body>
     </Card>
