@@ -47,7 +47,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                   <Card.Img variant="top" src={partyImg} />
                   <Card.Body>
                     <Card.Title>
-                      {partyDetails?.description}{" "}
+                      {partyDetails?.title}{" "}
                       {partyDetails?.privateParty && "🔐"}
                     </Card.Title>
                     <Card.Text>
@@ -58,7 +58,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                         {partyDetails?.date.toLocaleString().split("T")[0]}
                       </b>{" "}
                       <br />
-                      Description: <b>{partyDetails?.description}</b>
+                      Description: <i>{partyDetails?.description}</i>
                       <br />
                       Category: <b>{partyDetails?.category}</b> <br />
                       State: <b>{partyDetails?.state}</b>
