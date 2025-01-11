@@ -20,6 +20,7 @@ export const CreateParty = ({
 
   const navigate = useNavigate();
 
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [mood, setMood] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -56,6 +57,7 @@ export const CreateParty = ({
 
     const partyData = {
     userOrganizer : auth.currentUser?.username,
+    title: title,
     description: description,
     mood: mood,
     category: category,
@@ -89,10 +91,12 @@ export const CreateParty = ({
       <Container>
       <Form onSubmit={onCreate}>
       <Form.Group className="mb-3" controlId="basicData">
-        <Form.Label>Description of your party</Form.Label>
-        <Form.Control type="input" placeholder="Enter description" onChange={(e) => setDescription(e.target.value)}/>
+        <Form.Label>Title of your party</Form.Label>
+        <Form.Control type="text" placeholder="Enter description" onChange={(e) => setTitle(e.target.value)}/>
         <Form.Label>Mood of the party!</Form.Label>
-        <Form.Control type="input" placeholder="Just anything: one keyword, one slogan..." onChange={(e) => setMood(e.target.value)}/>      
+        <Form.Control type="input" placeholder="Just anything: one keyword, one slogan..." onChange={(e) => setMood(e.target.value)}/>
+        <Form.Label>Full description of your party</Form.Label>
+        <Form.Control as="textarea" rows={3} onChange={(e) => setDescription(e.target.value)}/>       
         <Form.Label>Date of the party</Form.Label>
         <Form.Control type="date" onChange={(e) => setDate(e.target.value)}/>  
         <Form.Label>Genre of music</Form.Label>

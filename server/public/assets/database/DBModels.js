@@ -14,6 +14,7 @@ var userSchema = new mongoose.Schema({
 //Party schema and model
 var partySchema = new mongoose.Schema({
     userOrganizer : String,
+    title: String,
     description: String,
     mood: String,
     category: String,

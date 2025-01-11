@@ -8,6 +8,7 @@ import api from "../axios";
 export interface IParty {
   _id: String;
   userOrganizer: String;
+  title: String;
   description: String;
   mood: String;
   category: String;

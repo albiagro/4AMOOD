@@ -58,6 +58,8 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                         {partyDetails?.date.toLocaleString().split("T")[0]}
                       </b>{" "}
                       <br />
+                      Description: <b>{partyDetails?.description}</b>
+                      <br />
                       Category: <b>{partyDetails?.category}</b> <br />
                       State: <b>{partyDetails?.state}</b>
                     </Card.Text>

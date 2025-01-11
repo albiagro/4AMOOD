@@ -64,7 +64,7 @@ export const Party = (props: Props) => {
       const newNotification = {
         userOwner: party.userOrganizer,
         datetime: new Date(),
-        message: `User ${auth.currentUser.username} has requested to partecipate to your party ${party.description}`,
+        message: `User ${auth.currentUser.username} has requested to partecipate to your party ${party.title}`,
         invite: true,
         partyID: party._id,
         userToBeAccepted: auth.currentUser.username,
@@ -160,7 +160,7 @@ export const Party = (props: Props) => {
     <Card className="myCard">
       <Card.Img variant="top" src={partyImg} />
       <Card.Body>
-        <Card.Title>{party.description} {party.privateParty && "🔐"}</Card.Title>
+        <Card.Title>{party.title} {party.privateParty && "🔐"}</Card.Title>
         <Card.Text>
           Organizer: <b>{party.userOrganizer}</b><br />
           Date: <b>{party.date.toLocaleString().split('T')[0]}</b> <br />

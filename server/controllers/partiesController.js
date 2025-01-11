@@ -12,6 +12,7 @@ module.exports = function (app) {
     if (
       !(
         req.body.userOrganizer &&
+        req.body.title &&
         req.body.description &&
         req.body.mood &&
         req.body.category &&
