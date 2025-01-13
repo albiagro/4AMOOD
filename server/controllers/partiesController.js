@@ -101,7 +101,6 @@ module.exports = function (app) {
       }
 
       if (req.body.toAccept) {
-
         const guestToUpdate = {
           username: guest,
           accepted: true
@@ -116,7 +115,8 @@ module.exports = function (app) {
           { $addToSet: {guests: guestToUpdate} }
         )
       }
-      else {
+
+      if (req.body.toAccept === false) {
         await DBModels.Party.updateOne(
           { _id: partyID },
           { $pull: {guests: {username: guest}} }

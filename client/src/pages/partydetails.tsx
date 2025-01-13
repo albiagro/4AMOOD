@@ -27,7 +27,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
 
   const getPartyDetails = () => {
     api({
-        method: "get",
+        method: "get",  
         url: url,
         responseType: "json",
       }).then(function (response) {
@@ -35,7 +35,8 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
       });
   }
 
-  const updateMessages = () => {
+  const updateMessages = (e : any) => {
+    e.preventDefault();    
     const newMessage : IMessage = {
       username: auth.currentUser.username,
       message: message
@@ -46,14 +47,16 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
       url: `/parties?partyID=${partyDetails?._id}`,
       data: {message: newMessage}
     }).then(function () {
-      getPartyDetails()
+      getPartyDetails()      
     });
+
+    setMessage("")
   }
 
   useEffect(() => {
     getPartyDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [partyDetails]);
   
   return (
     <div>
@@ -110,14 +113,14 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                     </Card.Title>
                     <Card.Text>
                       Post your message before or after the party to create hype! <br />
-                      Please be respectful of everyone. <br />
+                      Please be respectful of everyone. <br /><br />
                       {partyDetails?.messages?.map((message) => (
-                        <p><b>{message.username}:</b>{message.message}</p>
+                        <p><b>{message.username}: </b>{message.message}</p>
                         ))}
                     </Card.Text>
                     <Form onSubmit={updateMessages}>
                       <div style={{display: "flex"}}>
-                      <Form.Control type="input" placeholder="Write your message..." onChange={(e) => setMessage(e.target.value)}/>
+                      <Form.Control type="input" value={message} placeholder="Write your message..." onChange={(e) => setMessage(e.target.value)}/>
                       <span className='separator'> </span>
                       <Button type='submit'>🚀</Button>
                       </div>                        

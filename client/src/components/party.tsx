@@ -172,7 +172,7 @@ export const Party = (props: Props) => {
       }
     }
     else {
-      return true;
+      return false;
     }
   }
 
