@@ -130,6 +130,13 @@ module.exports = function (app) {
         )
       }
 
+      if (req.body.message) {
+        await DBModels.Party.updateOne(
+          { _id: partyID },
+          { $addToSet: {messages: req.body.message} }
+        )
+      }
+
     } catch (error) {
       console.log(error)
       return res.status(400).json({ message: error });

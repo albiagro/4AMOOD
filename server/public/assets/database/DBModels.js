@@ -23,7 +23,8 @@ var partySchema = new mongoose.Schema({
     date: Date,    
     privateParty: Boolean,
     guests: Array,
-    state: String
+    state: String,
+    messages: Array
 });
 
 //Notification schema and model

@@ -18,6 +18,12 @@ export interface IParty {
   privateParty: Boolean;
   guests: IGuest[];
   state: String;
+  messages: IMessage[]
+}
+
+export interface IMessage {
+  username: String,
+  message: String
 }
 
 export interface INotification {

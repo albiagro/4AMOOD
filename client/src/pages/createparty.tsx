@@ -66,7 +66,8 @@ export const CreateParty = ({
     date: date,    
     privateParty: privateParty,
     guests: guests,
-    state: "active"
+    state: "active",
+    messages: []
     }
 
     var response
