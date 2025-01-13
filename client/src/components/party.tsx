@@ -107,12 +107,12 @@ export const Party = (props: Props) => {
     navigate(`/parties/${party._id}`, {state:{partyID: party._id}})
   }
 
-  var button 
+  var sectionPartecipate 
   
   if (party.privateParty) {
     if (pendingState === false) {
       if (partecipateState) {
-        button = <div>
+        sectionPartecipate = <div>
       <FormLabel > Click to not partecipate </FormLabel>
       <Button className="btnPartecipate" variant="primary" onClick={() => removeUserAsGuest()}>
         No party 😟
@@ -120,7 +120,7 @@ export const Party = (props: Props) => {
       </div>
       }
       else {
-        button = <div>
+        sectionPartecipate = <div>
     <FormLabel >Click to ask to partecipate</FormLabel>
     <Button className="btnPartecipate" variant="primary" onClick={() => askToPartecipate()}>
       Ask to partecipate ❓
@@ -129,7 +129,7 @@ export const Party = (props: Props) => {
       }      
     }
     else {      
-        button = <div>
+        sectionPartecipate = <div>
         <FormLabel >Waiting for approval</FormLabel>
       <Button className="btnPartecipate" variant="primary" disabled={true}>
         Request pending 🕓
@@ -139,7 +139,7 @@ export const Party = (props: Props) => {
   }
   else {
     if (partecipateState === false) {
-      button = <div>
+      sectionPartecipate = <div>
       <FormLabel >Click to partecipate</FormLabel>
       <Button className="btnPartecipate" variant="primary" onClick={() => setUserAsGuest()}>
         Party!! 💣
@@ -147,12 +147,32 @@ export const Party = (props: Props) => {
       </div>
     }
     else {
-      button = <div>
+      sectionPartecipate = <div>
       <FormLabel > Click to not partecipate </FormLabel>
       <Button className="btnPartecipate" variant="primary" onClick={() => removeUserAsGuest()}>
         No party 😟
       </Button>
       </div>
+    }
+  }
+
+  const getAccessToPartyDetails = () => {
+    if (party.privateParty) {
+      if (pendingState === false) {
+        if (partecipateState) {
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+      else 
+      {
+        return true;
+      }
+    }
+    else {
+      return true;
     }
   }
 
@@ -167,9 +187,9 @@ export const Party = (props: Props) => {
           Category: <b>{party.category}</b> <br />
           State: <b>{party.state}</b>
         </Card.Text>        
-        {!props.organizedByMe && button}
+        {!props.organizedByMe && sectionPartecipate}
         <br />
-        <Button onClick={() => openPartyDetails()} variant="primary">More details</Button>
+        <Button disabled={getAccessToPartyDetails()} onClick={() => openPartyDetails()} variant="primary">More details</Button>
         {props.organizedByMe && <><span className='separator'> </span><Button onClick={() => cancelParty()} variant="outline-danger">Delete</Button></>}
       </Card.Body>
     </Card>

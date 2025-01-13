@@ -96,7 +96,7 @@ export const CreateParty = ({
         <Form.Label>Mood of the party!</Form.Label>
         <Form.Control type="input" placeholder="Just anything: one keyword, one slogan..." onChange={(e) => setMood(e.target.value)}/>
         <Form.Label>Full description of your party</Form.Label> <br />
-        <Form.Label>(Please specify also the location of the party, as just your location will be saved)</Form.Label>
+        <Form.Label>(Please specify also the location of the party, as just your geolocation will be saved)</Form.Label>
         <Form.Control as="textarea" rows={3} onChange={(e) => setDescription(e.target.value)}/>       
         <Form.Label>Date of the party</Form.Label>
         <Form.Control type="date" onChange={(e) => setDate(e.target.value)}/>  

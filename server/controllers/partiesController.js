@@ -68,7 +68,7 @@ module.exports = function (app) {
     
     try {
         //Search for parties that I have not organized, according to the distance and date I set
-        const data = await DBModels.Party.find({userOrganizer: {$ne: currentUser}, state: {$ne: 'canceled'}, latitude: {$gt:minLat, $lt: maxLat}, longitude: {$gt:minLon, $lt: maxLon}, date: date === "" ? {$gt: "01/01/1900"} : date}).sort({date: 1})
+        const data = await DBModels.Party.find({userOrganizer: {$ne: currentUser}, state: {$ne: 'canceled'}, latitude: {$gt:minLat, $lt: maxLat}, longitude: {$gt:minLon, $lt: maxLon}, date: date === "" ? {$gt: new Date()} : date}).sort({date: 1})
         res.json(data)
     } catch (error) {
       return res.status(400).json({ message: error });
