@@ -12,7 +12,7 @@ export const Intro = ( {setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
   return (
     <div className="introImage">
-        <Button style={{background-color:"#bcf2ff"}} href='/home' id='btnIntro'>Let's start</Button>
+        <Button href='/home' id='btnIntro'>Let's start</Button>
     </div>
   );
 }
