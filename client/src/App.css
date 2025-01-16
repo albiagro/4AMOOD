@@ -88,6 +88,18 @@
    left:50%;
    width:100px;
    bottom:20px;
+   animation: show 0s both;
+   animation-delay: 8s;
+}
+
+@keyframes show {
+  from {
+    visibility: hidden;
+  }
+  
+  to {
+    visibility: visible;
+  }
 }
 
 form label{
@@ -110,6 +122,8 @@ form {
 .separator {
   width: 2%;
 }
+
+
 
 @media screen and (min-width: 500px) {
 
