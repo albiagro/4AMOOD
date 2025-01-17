@@ -4,7 +4,7 @@ import api from '../axios';
 import avatarM from '../img/avatarM.png'
 import avatarF from '../img/avatarF.png'
 import { useSelector } from 'react-redux';
-import { Alert, Card } from 'react-bootstrap';
+import { Alert, Button, Card } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
 interface IUser {
@@ -57,6 +57,10 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
       <Card.Body>
       <Card.Title>{userDetails?.username} </Card.Title>
         <Card.Text>
+          <Button>Follow</Button>
+          <p>Name: <b>{userDetails?.name}</b></p>
+          <p>Surname: <b>{userDetails?.surname}</b></p>
+          <p>Birthday: <b>{userDetails?.birthday.toLocaleString().split('T')[0]}</b></p>
       </Card.Text>     
       </Card.Body>
     </Card> : <Alert variant="danger">

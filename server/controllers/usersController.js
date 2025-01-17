@@ -1,4 +1,5 @@
 var bodyparser = require("body-parser");
+var urlencodedParser = bodyparser.urlencoded({extended: false});
 var ConnectDB = require("../public/assets/database/DBConnection.js");
 var DBModels = require("../public/assets/database/DBModels.js");
 const {
@@ -174,7 +175,7 @@ module.exports = function (app) {
       const username = req.params.username
   
       try {
-          //Search for parties that I have not organized, according to the distance and date I set
+          //Search for users (not myself in order to show other users' details)
           const data = await DBModels.User.findOne({username: username})
           res.json(data)
       } catch (error) {
