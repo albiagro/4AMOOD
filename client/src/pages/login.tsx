@@ -55,8 +55,8 @@ export const Login = ({
         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
       </Form.Group>    
       
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="info" type="submit">
+        Login
       </Button>  
     </Form>
     <Form.Label className="errorLabel">{error}</Form.Label>

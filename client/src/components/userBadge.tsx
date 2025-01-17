@@ -33,7 +33,7 @@ export const UserBadge = () => {
     }).length
 
   return (
-    <Button href={`/user/${auth.currentUser?.username}`} variant="primary" className='userBtn' size="sm">
+    <Button href={`/user/${auth.currentUser?.username}`} variant="info" className='userBtn' size="sm">
       {auth.currentUser?.username} <Badge bg="secondary">{notificationsToBeRead} </Badge>
       <span className="visually-hidden">unread messages</span>
     </Button>

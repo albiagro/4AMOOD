@@ -80,8 +80,8 @@ export const Register = ({
       </Form.Group>  
       </Form.Group>    
       
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="info" type="submit">
+        Register
       </Button>  
     </Form>
     <Form.Label className="errorLabel">{error}</Form.Label>

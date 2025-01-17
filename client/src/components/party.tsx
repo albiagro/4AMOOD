@@ -189,7 +189,7 @@ export const Party = (props: Props) => {
         </Card.Text>        
         {!props.organizedByMe && sectionPartecipate}
         <br />
-        <Button disabled={getAccessToPartyDetails()} onClick={() => openPartyDetails()} variant="primary">More details</Button>
+        <Button disabled={getAccessToPartyDetails()} onClick={() => openPartyDetails()} variant="info">More details</Button>
         {props.organizedByMe && <><span className='separator'> </span><Button onClick={() => cancelParty()} variant="outline-danger">Delete</Button></>}
       </Card.Body>
     </Card>

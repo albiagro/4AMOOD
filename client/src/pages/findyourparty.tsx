@@ -156,7 +156,7 @@ function toDegrees(radians: number): number {
             <Form.Label>Party date</Form.Label>
             <Form.Control type="date" placeholder="Enter date" onChange={(e) => setDate(e.target.value)}/>
             </FormGroup>
-            <Button type="submit">Search</Button>
+            <Button variant="info" type="submit">Search</Button>
         </Form>
 
         {!loading ? ( 

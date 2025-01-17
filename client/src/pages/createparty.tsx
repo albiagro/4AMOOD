@@ -115,12 +115,12 @@ export const CreateParty = ({
           <Form.Check name="access" inline type="radio" label="Public" onChange={(e) => e.target.value ? setPrivateParty(false) : setPrivateParty(true)}/>
         </Form.Group>
         <Form.Group className="mb-2" controlId="location">
-        <Button variant="primary" onClick={() => pickLocation()}>Pick your location for the party</Button><br />
+        <Button variant="info" onClick={() => pickLocation()}>Pick your location for the party</Button><br />
           {latitude && longitude && <><Form.Label>Your current position: {latitude} {longitude}</Form.Label></>}
         </Form.Group>
       </Form.Group>      
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="info" type="submit">
+        Confirm
       </Button>  
     </Form>
     <Form.Label className="errorLabel">{error}</Form.Label>

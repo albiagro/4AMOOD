@@ -64,7 +64,7 @@ export const MyNavBar = () => {
                 <UserBadge/>
                 <Button
                   className='userBtn'
-                  variant="primary"
+                  variant="info"
                   size="sm"
                   onClick={signUserOut}
                 >

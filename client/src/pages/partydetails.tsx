@@ -122,7 +122,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                       <div style={{display: "flex"}}>
                       <Form.Control type="input" value={message} placeholder="Write your message..." onChange={(e) => setMessage(e.target.value)}/>
                       <span className='separator'> </span>
-                      <Button type='submit'>🚀</Button>
+                      <Button variant="info" type='submit'>🚀</Button>
                       </div>                        
                     </Form>
                   </Card.Body>
