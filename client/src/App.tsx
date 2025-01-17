@@ -8,11 +8,12 @@ import { Login } from './pages/login';
 import { Register } from './pages/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from './store/reducers/auth';
-import { User } from './pages/user';
+import { MyUser } from './pages/myuser';
 import { FindYourParty } from './pages/findyourparty';
 import { MyParties } from './pages/myparties';
 import { CreateParty } from './pages/createparty';
 import { PartyDetails } from './pages/partydetails';
+import { User } from './pages/user';
 
 function App() {
 
@@ -36,11 +37,12 @@ function App() {
           <Route path="/home" element={<Home setShowNavbar={setShowNavbar} />} />
           <Route path="/login" element={<Login setShowNavbar={setShowNavbar} />} />
           <Route path="/register" element={<Register setShowNavbar={setShowNavbar} />} />
-          <Route path={`/user/${auth.currentUser?.username}`} element={<User setShowNavbar={setShowNavbar} />} /> 
+          <Route path={`/user/${auth.currentUser?.username}`} element={<MyUser setShowNavbar={setShowNavbar} />} /> 
           {auth.currentUser && <><Route path="/myparties" element={<MyParties setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/createparty" element={<CreateParty setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/findyourparty" element={<FindYourParty setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/parties/*" element={<PartyDetails setShowNavbar={setShowNavbar} />} /> </> }
+          {auth.currentUser && <><Route path={`/users/*`} element={<User setShowNavbar={setShowNavbar} />} />  </> }
           <Route path="*" element={<Home setShowNavbar={setShowNavbar} />} />
         </Routes>
       </BrowserRouter>

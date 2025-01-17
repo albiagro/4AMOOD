@@ -169,6 +169,19 @@ module.exports = function (app) {
     }
   });
 
+  app.get("/users/:username", urlencodedParser, async function (req, res) {
+  
+      const username = req.params.username
+  
+      try {
+          //Search for parties that I have not organized, according to the distance and date I set
+          const data = await DBModels.User.findOne({username: username})
+          res.json(data)
+      } catch (error) {
+        return res.status(400).json({ message: error });
+      }     
+    });
+
   app.post("/notifications", jsonParser, async function (req, res) {
     
     //Default notification for new users

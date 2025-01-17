@@ -114,7 +114,7 @@ export const Party = (props: Props) => {
       if (partecipateState) {
         sectionPartecipate = <div>
       <FormLabel > Click to not partecipate </FormLabel>
-      <Button className="btnPartecipate" variant="primary" onClick={() => removeUserAsGuest()}>
+      <Button className="btnPartecipate" variant="info" onClick={() => removeUserAsGuest()}>
         No party 😟
       </Button>
       </div>
@@ -122,7 +122,7 @@ export const Party = (props: Props) => {
       else {
         sectionPartecipate = <div>
     <FormLabel >Click to ask to partecipate</FormLabel>
-    <Button className="btnPartecipate" variant="primary" onClick={() => askToPartecipate()}>
+    <Button className="btnPartecipate" variant="info" onClick={() => askToPartecipate()}>
       Ask to partecipate ❓
     </Button>
     </div>
@@ -131,7 +131,7 @@ export const Party = (props: Props) => {
     else {      
         sectionPartecipate = <div>
         <FormLabel >Waiting for approval</FormLabel>
-      <Button className="btnPartecipate" variant="primary" disabled={true}>
+      <Button className="btnPartecipate" variant="info" disabled={true}>
         Request pending 🕓
       </Button>
       </div>
@@ -141,7 +141,7 @@ export const Party = (props: Props) => {
     if (partecipateState === false) {
       sectionPartecipate = <div>
       <FormLabel >Click to partecipate</FormLabel>
-      <Button className="btnPartecipate" variant="primary" onClick={() => setUserAsGuest()}>
+      <Button className="btnPartecipate" variant="info" onClick={() => setUserAsGuest()}>
         Party!! 💣
       </Button>
       </div>
@@ -149,7 +149,7 @@ export const Party = (props: Props) => {
     else {
       sectionPartecipate = <div>
       <FormLabel > Click to not partecipate </FormLabel>
-      <Button className="btnPartecipate" variant="primary" onClick={() => removeUserAsGuest()}>
+      <Button className="btnPartecipate" variant="info" onClick={() => removeUserAsGuest()}>
         No party 😟
       </Button>
       </div>
@@ -176,13 +176,20 @@ export const Party = (props: Props) => {
     }
   }
 
+  // If I'm clicking to the link of username but it's myself, I will not show the user page, but the myuser page
+  const urlToRedirect = party.userOrganizer === auth.currentUser.username ? `/user/${auth.currentUser.username}` : `/users/${party.userOrganizer}`
+
+  const redirectToUserPage = () => {
+    navigate(urlToRedirect, {state:{user: party.userOrganizer}})
+  }
+
   return (
     <Card className="myCard">
       <Card.Img variant="top" src={partyImg} />
       <Card.Body>
         <Card.Title>{party.title} {party.privateParty && "🔐"}</Card.Title>
         <Card.Text>
-          Organizer: <b>{party.userOrganizer}</b><br />
+          Organizer: <Button onClick={() => redirectToUserPage()} variant="info" size="sm">{party.userOrganizer}</Button> <br />
           Date: <b>{party.date.toLocaleString().split('T')[0]}</b> <br />
           Category: <b>{party.category}</b> <br />
           State: <b>{party.state}</b>
