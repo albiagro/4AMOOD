@@ -32,8 +32,12 @@ export const UserBadge = () => {
       return !item.read;
     }).length
 
+    const redirectUser = () => {
+      window.location.href = `/user/${auth.currentUser?.username}`
+    }
+
   return (
-    <Button href={`/user/${auth.currentUser?.username}`} variant="info" className='userBtn' size="sm">
+    <Button variant="info" onClick={() => redirectUser()} className='userBtn' size="sm">
       {auth.currentUser?.username} <Badge bg="secondary">{notificationsToBeRead} </Badge>
       <span className="visually-hidden">unread messages</span>
     </Button>
