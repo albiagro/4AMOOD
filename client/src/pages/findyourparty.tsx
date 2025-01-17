@@ -18,7 +18,8 @@ export const FindYourParty = ({setShowNavbar} : {setShowNavbar : React.Dispatch<
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [date, setDate] = useState("");
-  const [distance, setDistance] = useState<any>(1);
+  const [distance, setDistance] = useState<any>(10);
+  const [category, setCategory] = useState("");
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error);
@@ -43,7 +44,7 @@ export const FindYourParty = ({setShowNavbar} : {setShowNavbar : React.Dispatch<
     e.preventDefault();
     setLoading(true);
 
-    const url = `/parties?currentUser=${auth.currentUser?.username}&minLat=${boundingBox.minLat}&maxLat=${boundingBox.maxLat}&minLon=${boundingBox.minLon}&maxLon=${boundingBox.maxLon}&date=${date}`
+    const url = `/parties?currentUser=${auth.currentUser?.username}&minLat=${boundingBox.minLat}&maxLat=${boundingBox.maxLat}&minLon=${boundingBox.minLon}&maxLon=${boundingBox.maxLon}&date=${date}&category=${category}`
 
     api({
       method: "get",
@@ -153,10 +154,18 @@ function toDegrees(radians: number): number {
           <Form.Label>Distance from you:</Form.Label><span> </span>
           <Form.Label>{distance} km</Form.Label>
           <Form.Range value={distance} min="1" max="50" onChange={(e) => setDistance(e.target.value)}/>
-            <Form.Label>Party date</Form.Label>
-            <Form.Control type="date" placeholder="Enter date" onChange={(e) => setDate(e.target.value)}/>
-            </FormGroup>
-            <Button variant="info" type="submit">Search</Button>
+          <Form.Label>Party date</Form.Label>
+          <Form.Control type="date" placeholder="Enter date" onChange={(e) => setDate(e.target.value)}/>
+          <Form.Label>Select a party category</Form.Label>
+            <Form.Select aria-label="Default select example" onChange={(e) => setCategory(e.target.value)}>
+            <option value="">All</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Tech-house">Tech-house</option>
+            <option value="Raggae">Raggae</option>
+            <option value="Hip-hop">Hip-hop</option>
+          </Form.Select>
+          </FormGroup>
+          <Button variant="info" type="submit">Search</Button>
         </Form>
 
         {!loading ? ( 

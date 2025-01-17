@@ -146,7 +146,7 @@ export const MyParties = ({
           button:
         </p>
         <br />
-        <Button href="/createparty" variant="info" id="btnCreateParty">
+        <Button href="/createparty" id="btnCreateParty" variant="outline-info">
           Let's organize a party!
         </Button>
       </Alert>
@@ -173,7 +173,7 @@ export const MyParties = ({
           button:
         </p>
         <br />
-        <Button href="/findyourparty" variant="info">
+        <Button href="/findyourparty" variant="outline-info">
           Find your party!
         </Button>
       </Alert>

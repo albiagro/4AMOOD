@@ -65,10 +65,15 @@ module.exports = function (app) {
     const minLon = req.query.minLon
     const maxLon = req.query.maxLon
     const date = req.query.date
-    
+    const category = req.query.category
+
+    let filter = {userOrganizer: {$ne: currentUser}, state: {$ne: 'canceled'}, latitude: {$gt:minLat, $lt: maxLat}, longitude: {$gt:minLon, $lt: maxLon}, date: date === "" ? {$gt: new Date()} : date}
+
+    if (category != "") filter.category = category
+
     try {
         //Search for parties that I have not organized, according to the distance and date I set
-        const data = await DBModels.Party.find({userOrganizer: {$ne: currentUser}, state: {$ne: 'canceled'}, latitude: {$gt:minLat, $lt: maxLat}, longitude: {$gt:minLon, $lt: maxLon}, date: date === "" ? {$gt: new Date()} : date}).sort({date: 1})
+        const data = await DBModels.Party.find(filter).sort({date: 1})
         res.json(data)
     } catch (error) {
       return res.status(400).json({ message: error });
