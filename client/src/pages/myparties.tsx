@@ -111,7 +111,6 @@ export const MyParties = ({
   }
 
   function userPartecipating(party : IParty) : boolean {
-
     var userFound = false;
 
     if (party.privateParty) {
