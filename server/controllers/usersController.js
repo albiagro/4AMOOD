@@ -120,12 +120,14 @@ module.exports = function (app) {
               { username: req.body.userToUpdate },
               { $addToSet: {following: req.body.userToFollow} }
             )
+            return res.status(200).json({ message: "Done!" });
           }
           else {
             await DBModels.User.findOneAndUpdate(
               { username: req.body.userToUpdate },
               { $pull: {following: req.body.userToRemove} }
             )
+            return res.status(200).json({ message: "Done!" });
           }
         }
         else

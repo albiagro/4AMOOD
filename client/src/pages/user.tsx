@@ -6,6 +6,7 @@ import avatarF from '../img/avatarF.png'
 import { useSelector } from 'react-redux';
 import { Alert, Button, Card, Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 interface IUser {
   name: String,
@@ -39,7 +40,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
   useEffect(() => {
     getUserDetails();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [follow]);
 
   const getUserDetails = () => {    
 
@@ -54,30 +55,44 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
       .catch((error) => console.log(error)); //do nothing
   }
 
-  const setUserFollow = () => {
+  const setUserFollow = async () => {
 
-    if (follow) {
+    if (follow) { 
+
       api({
         method: "put",
         url: `/users`,
         data: {userToUpdate: auth.currentUser?.username, userToRemove: usernameToSearch}
       })
-        .then(function (response) {
-          setFollow(false);
-        })
-        .catch((error) => console.log(error)); //do nothing
+      .then(() => setFollow(false))      
     }
     else
     {
-      api({
-        method: "put",
-        url: `/users`,
-        data: {userToUpdate: auth.currentUser?.username, userToFollow: usernameToSearch}
-      })
-        .then(function (response) {
-          setFollow(true);
+      const newNotification = {
+        userOwner: usernameToSearch,
+        datetime: new Date(),
+        message: `User ${auth.currentUser?.username} is now following you! Notifications for your new parties will be sent to ${auth.currentUser?.username} automatically.`,
+        invite: false,
+        partyID: null,
+        userToBeAccepted: null,
+        read: false
+      }
+      
+      axios.all([        
+        api({
+          method: "put",
+          url: `/users`,
+          data: {userToUpdate: auth.currentUser?.username, userToFollow: usernameToSearch}
+        }),
+        api({
+          method: "post",
+          url: `/notifications`,
+          data: newNotification
         })
-        .catch((error) => console.log(error)); //do nothing
+      ]).then()
+      .catch((error) => console.log(error)); //do nothing
+
+      setFollow(true)
     }    
   }
 
