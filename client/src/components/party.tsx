@@ -107,7 +107,7 @@ export const Party = (props: Props) => {
     navigate(`/parties/${party._id}`, {state:{partyID: party._id}})
   }
 
-  var sectionPartecipate 
+  var sectionPartecipate   
   
   if (party.privateParty) {
     if (pendingState === false) {
@@ -192,7 +192,8 @@ export const Party = (props: Props) => {
           Organizer: <Button onClick={() => redirectToUserPage()} variant="info" size="sm">{party.userOrganizer}</Button> <br />
           Date: <b>{party.date.toLocaleString().split('T')[0]}</b> <br />
           Category: <b>{party.category}</b> <br />
-          State: <b>{party.state}</b>
+          State: <b>{party.state}</b> <br />
+          Partecipation: {partecipateState.toString()}
         </Card.Text>        
         {!props.organizedByMe && sectionPartecipate}
         <br />

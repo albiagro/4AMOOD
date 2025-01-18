@@ -49,7 +49,7 @@ module.exports = function (app) {
         res.json(data)
       }
       else {
-        const data = await DBModels.Party.find({userOrganizer: {$ne: userAsGuest}, state: {$ne: 'canceled'}, $or: [{guests: {username: userAsGuest, accepted: true}}, {guests: {username: userAsGuest, accepted: false}}]}).sort({date: 1})
+        const data = await DBModels.Party.find({userOrganizer: {$ne: userAsGuest}, state: {$ne: 'canceled'}, guests: {username: userAsGuest, accepted: true}}).sort({date: 1})
         res.json(data)
       }
     } catch (error) {

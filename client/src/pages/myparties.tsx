@@ -86,6 +86,7 @@ export const MyParties = ({
       responseType: "json",
     })
       .then(function (response) {
+        console.log(response)
         setPartiesListMeAsAGuest(response.data.map((doc: any) => ({ ...doc })));
         setLoading(false);
       })

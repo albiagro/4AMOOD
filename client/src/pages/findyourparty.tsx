@@ -128,7 +128,6 @@ function toDegrees(radians: number): number {
   }
 
   function userPartecipating(party : IParty) : boolean {
-
     var userFound = false;
 
     if (party.privateParty) {
@@ -140,7 +139,12 @@ function toDegrees(radians: number): number {
       });
     }
     else {
-      userFound = party.guests.includes({username: auth.currentUser?.username})
+      party.guests.forEach(element => {
+        if (element.username === auth.currentUser?.username) 
+        {
+          userFound = true;
+        }      
+      });
     }
     return userFound;
   }
