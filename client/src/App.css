@@ -131,6 +131,10 @@ form {
   width: 60%;
 }
 
+#otherUserCard {
+  width: 40%;
+}
+
 .notificationCard {
   width: 90%;
 }

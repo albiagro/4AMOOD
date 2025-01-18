@@ -90,7 +90,8 @@ module.exports = function (app) {
         birthday: req.body.birthday,
         username: req.body.username,
         email: req.body.email,
-        password: hashedPassword
+        password: hashedPassword,
+        following: []
       });
 
       const user = await newUser.save();
@@ -111,26 +112,50 @@ module.exports = function (app) {
   app.put("/users", jsonParser, async function (req, res) {
     try {
 
-        const userWithSameEmail = await DBModels.User.findOne({
-          email: req.body.email,
-        });
-  
-        if (userWithSameEmail) {
-          return res.status(409).json({ message: "E-mail already used!" });
-        }
-  
-        const salt = 10;
-        const hashedPassword = await bcrypt.hash(req.body.password, salt);
-  
-        await DBModels.User.findOneAndUpdate(
-          { username: req.body.username },
-          {
-            name: req.body.name,
-            surname: req.body.surname,
-            password: hashedPassword,
-            email: req.body.email,
+      // I'm just updating followers data and not user details
+        if (req.body.userToUpdate) {
+
+          if (req.body.userToFollow) {
+
+            await DBModels.User.findOneAndUpdate(
+              { username: req.body.username },
+              {
+                $addToSet: userToFollow
+              }
+            )
           }
-        )
+          else {
+            await DBModels.User.findOneAndUpdate(
+              { username: req.body.username },
+              {
+                $pull: userToRemove
+              }
+            )
+          }
+        }
+        else
+        {
+          const userWithSameEmail = await DBModels.User.findOne({
+            email: req.body.email,
+          });
+    
+          if (userWithSameEmail) {
+            return res.status(409).json({ message: "E-mail already used!" });
+          }
+    
+          const salt = 10;
+          const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    
+          await DBModels.User.findOneAndUpdate(
+            { username: req.body.username },
+            {
+              name: req.body.name,
+              surname: req.body.surname,
+              password: hashedPassword,
+              email: req.body.email,
+            }
+          )
+        }        
 
     } catch (error) {
       console.log("Error while updating user: " + error);

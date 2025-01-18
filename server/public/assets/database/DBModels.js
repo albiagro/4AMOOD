@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema({
     birthday: Date,
     username: String,
     password: String,
-    email: String
+    email: String,
+    following: Array
 });
 
 //Party schema and model
