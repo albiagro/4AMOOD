@@ -98,6 +98,7 @@ module.exports = function (app) {
     try {
       // Update guests
 
+      // Party is public and guest has set the partecipation
       if (req.body.add) {
         await DBModels.Party.updateOne(
           { _id: partyID },
@@ -105,6 +106,7 @@ module.exports = function (app) {
         )
       }
 
+      // Party is private, guest has been approved I update the existing guest to accept it
       if (req.body.toAccept) {
         const guestToUpdate = {
           username: guest,
@@ -121,13 +123,15 @@ module.exports = function (app) {
         )
       }
 
-      if (req.body.toAccept === false) {
+      // User has been not approved, or user has voluntarily removed the partecipation
+      if (req.body.toAccept === false || req.body.remove) {
         await DBModels.Party.updateOne(
           { _id: partyID },
           { $pull: {guests: {username: guest}} }
         )
       }
 
+      // If user organizer set the party to canceled status
       if (req.body.state === "canceled") {
         await DBModels.Party.updateOne(
           { _id: partyID },
@@ -135,6 +139,7 @@ module.exports = function (app) {
         )
       }
 
+      // Messages betweend users on party's details
       if (req.body.message) {
         await DBModels.Party.updateOne(
           { _id: partyID },

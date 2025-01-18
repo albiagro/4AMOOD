@@ -51,7 +51,7 @@ export const Party = (props: Props) => {
     api({
       method: "put",
       url: `/parties?partyID=${party._id}`,
-      data: {guest: auth.currentUser.username, add: false}
+      data: {guest: auth.currentUser.username, remove: false}
     })
       .then(function (response) {})
       .catch((error) => console.log(error)); //do nothing
