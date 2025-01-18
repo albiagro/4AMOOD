@@ -118,18 +118,14 @@ module.exports = function (app) {
           if (req.body.userToFollow) {
 
             await DBModels.User.findOneAndUpdate(
-              { username: req.body.username },
-              {
-                $addToSet: userToFollow
-              }
+              { username: req.body.userToUpdate },
+              { $addToSet: {following: userToFollow} }
             )
           }
           else {
             await DBModels.User.findOneAndUpdate(
-              { username: req.body.username },
-              {
-                $pull: userToRemove
-              }
+              { username: req.body.userToUpdate },
+              { $pull: {following: userToRemove} }
             )
           }
         }
