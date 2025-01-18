@@ -112,22 +112,19 @@ module.exports = function (app) {
   app.put("/users", jsonParser, async function (req, res) {
     try {
 
-      console.log(req.body.userToUpdate)
-      console.log(req.body.userToFollow)
-
       // I'm just updating followers data and not user details
         if (req.body.userToUpdate) {
 
           if (req.body.userToFollow) {
             await DBModels.User.findOneAndUpdate(
               { username: req.body.userToUpdate },
-              { $addToSet: {following: userToFollow} }
+              { $addToSet: {following: req.body.userToFollow} }
             )
           }
           else {
             await DBModels.User.findOneAndUpdate(
               { username: req.body.userToUpdate },
-              { $pull: {following: userToRemove} }
+              { $pull: {following: req.body.userToRemove} }
             )
           }
         }
