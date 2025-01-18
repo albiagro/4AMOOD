@@ -59,7 +59,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     if (follow) {
       api({
         method: "put",
-        url: `users/${auth.currentUser?.username}`,
+        url: `/users`,
         data: {userToUpdate: auth.currentUser?.username, userToRemove: usernameToSearch}
       })
         .then(function (response) {
@@ -71,7 +71,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     {
       api({
         method: "put",
-        url: `users/${auth.currentUser?.username}`,
+        url: `/users`,
         data: {userToUpdate: auth.currentUser?.username, userToFollow: usernameToSearch}
       })
         .then(function (response) {
