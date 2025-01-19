@@ -6,9 +6,8 @@
   padding: 0;
 }
 
-html, body {
+html, body, .backgroundContainer {
   height: 100%;
-  width: 100%;
 }
 
 .App {
@@ -136,10 +135,13 @@ form {
 }
 
 .backgroundContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-image: url("./img/background.png");
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  min-height: 100vh; /* Assicura che riempia almeno l'altezza della finestra */
 }
 
 }
@@ -152,13 +154,16 @@ form {
     background-size:contain;
     background-position:center;
   }
-
+  
   .backgroundContainer {
-    background-image: url("./img/background-mobile.png");
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url("./img/background-mobile.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Assicura che riempia almeno l'altezza della finestra */
+}
 
   .userCard {
     width: 100%;
