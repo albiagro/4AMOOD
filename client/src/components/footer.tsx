@@ -21,7 +21,7 @@ export const Footer = () => {
                     </Col>
                     <Col>
                         <h5 className="title-footer">Contact us!</h5>
-                        <p className="text-footer">For any enquiry or suggestion: 4amood@live.it</p>
+                        <p className="text-footer">For any enquiry or suggestion, contact us here</p>
                     </Col>
                 </Row>
             </Container>
