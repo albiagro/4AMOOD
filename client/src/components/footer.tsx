@@ -15,13 +15,13 @@ export const Footer = () => {
                     <Col>
                         <Nav className="flex-column fs-5" >
                             <NavLink to="/home" className="text-footer">Home</NavLink>
-                            <NavLink to="/home" className="text-footer">About</NavLink>
-                            <NavLink to="/home" className="text-footer">Get support</NavLink>
+                            <NavLink to="/about" className="text-footer">About</NavLink>
+                            <NavLink to="/support" className="text-footer">Get support</NavLink>
                         </Nav>
                     </Col>
                     <Col>
                         <h5 className="title-footer">Contact us!</h5>
-                        <p className="text-footer">For any enquiry or suggestion, contact us here</p>
+                        <p className="text-footer">Any issue or suggestion? Contact us <a href='/support'>here</a></p>
                     </Col>
                 </Row>
             </Container>
