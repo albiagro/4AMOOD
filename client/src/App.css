@@ -15,13 +15,6 @@ html, body {
   text-align: center;  
 }
 
-.backgroundContainer {
-  background-image: url("./img/background.png");
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-}
-
 .introImage {
   background-color: #23262D;
   height: 100vh;
@@ -128,8 +121,6 @@ form {
   width: 2%;
 }
 
-
-
 @media screen and (min-width: 500px) {
 
 .userCard {
@@ -144,6 +135,13 @@ form {
   width: 90%;
 }
 
+.backgroundContainer {
+  background-image: url("./img/background.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
 }
 
 @media screen and (max-width: 500px) {
@@ -153,6 +151,13 @@ form {
     background-repeat:no-repeat;
     background-size:contain;
     background-position:center;
+  }
+
+  .backgroundContainer {
+    background-image: url("./img/background-mobile.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
   }
 
   .userCard {
