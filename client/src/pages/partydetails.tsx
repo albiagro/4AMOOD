@@ -1,6 +1,6 @@
 import React, {  useEffect, useLayoutEffect, useState} from 'react';
 import { Footer } from '../components/footer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IMessage, IParty } from './myparties';
 import api from '../axios';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
@@ -22,6 +22,8 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
   const [message, setMessage] = useState("");
 
   const auth = useSelector((state: any) => state.auth);
+
+  const navigate = useNavigate();
 
   const url = `/parties/${location.state.partyID}`
 
@@ -57,6 +59,20 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
     getPartyDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [partyDetails]);
+
+  // If I'm clicking to the link of username but it's myself, I will not show the user page, but the myuser page
+  const urlToRedirect = partyDetails?.userOrganizer === auth.currentUser.username ? `/user/${auth.currentUser.username}` : `/users/${partyDetails?.userOrganizer}`
+
+  const redirectToUserPage = () => {
+    navigate(urlToRedirect, {state:{user: partyDetails?.userOrganizer}})
+  }
+
+  const redirectToGuestPage = (guestUsername : String) => {
+    // If I'm clicking to the link of username but it's myself, I will not show the user page, but the myuser page
+    const urlToRedirect = guestUsername === auth.currentUser.username ? `/user/${auth.currentUser.username}` : `/users/${guestUsername}`
+
+    navigate(urlToRedirect, {state:{user: guestUsername}})
+  }
   
   return (
     <div>
@@ -73,8 +89,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                       {partyDetails?.privateParty && "🔐"}
                     </Card.Title>
                     <Card.Text>
-                      Organizer: <b>{partyDetails?.userOrganizer}</b>
-                      <br />
+                    Organizer: <Button onClick={() => redirectToUserPage()} variant="info" size="sm">{partyDetails?.userOrganizer}</Button> <br />
                       Date:{" "}
                       <b>
                         {partyDetails?.date.toLocaleString().split("T")[0]}
@@ -99,7 +114,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                         <>    
                         {guest.sex === 'M' ? <img src={avatarM} alt='guestAvatar' height="30" width="30"/>
                         : <img src={avatarF} alt='guestAvatar' height="30" width="30"/>}
-                        <p>{guest.username}</p>  
+                        <Button onClick={() => redirectToGuestPage(guest.username)} variant="info" size="sm">{guest.username}</Button><span className='separator'> </span>
                         </>))}
                     </Card.Text>
                   </Card.Body>

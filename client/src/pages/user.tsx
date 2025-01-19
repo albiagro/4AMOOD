@@ -71,7 +71,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
       const newNotification = {
         userOwner: usernameToSearch,
         datetime: new Date(),
-        message: `User ${auth.currentUser?.username} is now following you! Notifications for your new parties will be sent to ${auth.currentUser?.username} automatically.`,
+        message: `User ${auth.currentUser?.username} is now following you! A notification for your new parties will be automatically sent to ${auth.currentUser?.username}.`,
         invite: false,
         partyID: null,
         userToBeAccepted: null,

@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState} from 'react';
 import { Button, Card, Col, Form, Row, Toast, ToastContainer } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import avatarM from '../img/avatarM.png'
 import avatarF from '../img/avatarF.png'
 import { updateUser } from '../store/reducers/auth';
@@ -16,6 +16,8 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
     setShowNavbar(true);
     // eslint-disable-next-line
   }, [])
+
+  const navigate = useNavigate();
   
   const auth = useSelector((state: any) => state.auth)
 
@@ -89,7 +91,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
     const newNotification = {
       userOwner: notification.userToBeAccepted,
       datetime: new Date(),
-      message: `User ${auth.currentUser.username} has approved your request to partecipate to the party!`,
+      message: `User ${auth.currentUser.username} has approved your request to partecipate to this party! You can find more details`,
       invite: false,
       partyID: notification.partyID,
       userToBeAccepted: null,
@@ -151,6 +153,10 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
     getNotification();
   }
+
+  const openPartyDetails = (partyID : String) => {
+    navigate(`/parties/${partyID}`, {state:{partyID: partyID}})
+  }
   
   return (
     <div>
@@ -206,7 +212,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
                       <strong className="me-auto">Admin</strong>
                       <small className="text-muted">{notification.datetime.toLocaleString().split('T')[0]} {notification.datetime.toLocaleString().split('T')[1].split(".")[0]}</small>
                     </Toast.Header>
-                    <Toast.Body >{notification.message}<br/>
+                    <Toast.Body >{notification.message} {notification.partyID && <Button onClick={() => openPartyDetails(notification.partyID)} variant='info' size='sm'>here</Button>}<br/>
                     <Button onClick={() => setNotificationRead(notification)} variant="outline-success">Read</Button>
                     </Toast.Body>
                   </Toast>

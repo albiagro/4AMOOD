@@ -86,7 +86,6 @@ export const MyParties = ({
       responseType: "json",
     })
       .then(function (response) {
-        console.log(response)
         setPartiesListMeAsAGuest(response.data.map((doc: any) => ({ ...doc })));
         setLoading(false);
       })
@@ -178,7 +177,7 @@ export const MyParties = ({
         </Button>
       </Alert>
           
-      {!loading ? (
+      {!loading && partiesListMeAsAGuest ? (
         <Row xs={1} md={4} className="g-8">
         {partiesListMeAsAGuest?.map((party) => (
           <Col>

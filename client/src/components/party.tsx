@@ -193,7 +193,6 @@ export const Party = (props: Props) => {
           Date: <b>{party.date.toLocaleString().split('T')[0]}</b> <br />
           Category: <b>{party.category}</b> <br />
           State: <b>{party.state}</b> <br />
-          Partecipation: {partecipateState.toString()}
         </Card.Text>        
         {!props.organizedByMe && sectionPartecipate}
         <br />
