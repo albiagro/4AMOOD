@@ -205,6 +205,19 @@ module.exports = function (app) {
       }     
     });
 
+    app.get("/users", urlencodedParser, async function (req, res) {
+  
+      const userFollowed = req.query.userFollowed
+  
+      try {
+          //Search for users (not myself in order to show other users' details)
+          const data = await DBModels.User.find({ "following": userFollowed })
+          res.json(data)
+      } catch (error) {
+        return res.status(400).json({ message: error });
+      }     
+    });
+
   app.post("/notifications", jsonParser, async function (req, res) {
     
     //Default notification for new users

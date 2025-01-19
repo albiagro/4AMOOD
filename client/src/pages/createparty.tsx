@@ -68,7 +68,7 @@ export const CreateParty = ({
     guests: guests,
     state: "active",
     messages: []
-    }
+    }    
 
     var response
     
@@ -78,6 +78,39 @@ export const CreateParty = ({
     })
   
     if (response.status === 200) {
+      // Get users who follows me
+     const url = `/users?userFollowed=${auth.currentUser?.username}`
+
+     api({
+      method: "get",
+      url: url,
+      responseType: "json",
+    })
+      .then(function (response) {
+        // For each guest, I send a notification of the party created
+        response.data.forEach((follower: any) => {
+
+          const newNotification = {
+            userOwner: follower.username,
+            datetime: new Date(),
+            message: `User ${auth.currentUser.username} has just created a new party "${title}"! Find it at page "Find your party"`,
+            invite: false,
+            partyID: null,
+            userToBeAccepted: null,
+            read: false
+          }
+
+            api({
+              method: "post",
+              url: `/notifications`,
+              data: newNotification
+            })
+          .then()
+          .catch((error) => console.log(error)); //do nothing
+        });
+      })
+      .catch((error) => console.log(error)); //do nothing
+
       navigate("/myparties");
     }
     } catch (error) {
