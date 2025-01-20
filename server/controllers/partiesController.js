@@ -14,7 +14,6 @@ module.exports = function (app) {
         req.body.userOrganizer &&
         req.body.title &&
         req.body.description &&
-        req.body.mood &&
         req.body.category &&
         req.body.latitude &&
         req.body.longitude &&
