@@ -168,5 +168,10 @@ form {
   .notificationCard {
     width: 100%;
   }
+
+  #footerNav {
+    justify-content: center;
+    align-items: center;
+  }
   
 }
