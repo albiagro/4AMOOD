@@ -93,12 +93,14 @@ export const Party = (props: Props) => {
       .catch((error) => console.log(error)); //do nothing
   };
 
-  const cancelParty = () => {
-    api({
+  const cancelParty = async () => {
+    await api({
       method: "put",
       url: `/parties?partyID=${party._id}`,
       data: {state: "canceled"}
     })
+
+   window.location.reload();
   }
 
   const openPartyDetails = () => {
