@@ -99,8 +99,6 @@ export const Party = (props: Props) => {
       url: `/parties?partyID=${party._id}`,
       data: {state: "canceled"}
     })
-
-    window.location.reload()
   }
 
   const openPartyDetails = () => {
