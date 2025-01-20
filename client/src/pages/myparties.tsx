@@ -10,7 +10,6 @@ export interface IParty {
   userOrganizer: String;
   title: String;
   description: String;
-  mood: String;
   category: String;
   latitude: String;
   longitude: String;

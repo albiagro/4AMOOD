@@ -17,7 +17,6 @@ var partySchema = new mongoose.Schema({
     userOrganizer : String,
     title: String,
     description: String,
-    mood: String,
     category: String,
     latitude: String,
     longitude: String,

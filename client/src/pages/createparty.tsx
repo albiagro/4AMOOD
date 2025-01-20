@@ -5,6 +5,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import { Footer } from "../components/footer";
 import { IGuest } from "./myparties";
 import api from "../axios";
+import { LoadScript, Autocomplete } from "@react-google-maps/api";
 
 export const CreateParty = ({
   setShowNavbar,
@@ -22,144 +23,139 @@ export const CreateParty = ({
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [mood, setMood] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [category, setCategory] = useState("Commercial"); //default one
+  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("Commercial"); // Default one
   const [date, setDate] = useState("");
   const [privateParty, setPrivateParty] = useState(false);
   const [error, setError] = useState("");
 
-  function pickLocation() {
-    navigator.geolocation.getCurrentPosition(success, errorLocation);
-  }
-  
-  function success(position : any) {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
-  }
-  
-  function errorLocation() {
-    setError("Unable to retrieve your location");
-  }
+  const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
+
+  const onLoadAutocomplete = (autocompleteInstance: google.maps.places.Autocomplete) => {
+    setAutocomplete(autocompleteInstance);
+  };
+
+  const onPlaceChanged = () => {
+    if (autocomplete) {
+      const place = autocomplete.getPlace();
+      if (place.geometry) {
+        setLatitude(place.geometry.location?.lat().toString() || "");
+        setLongitude(place.geometry.location?.lng().toString() || "");
+        setAddress(place.formatted_address || "");
+      } else {
+        setError("Unable to retrieve location details.");
+      }
+    }
+  };
 
   async function onCreate(e: any) {
     e.preventDefault();
 
-    var guests : IGuest[] = []
-    const guest : IGuest = {
+    var guests: IGuest[] = [];
+    const guest: IGuest = {
       username: auth.currentUser?.username,
       sex: auth.currentUser?.sex,
       birthday: auth.currentUser?.birthday,
-      accepted: true
-    }
-    guests.push(guest)
+      accepted: true,
+    };
+    guests.push(guest);
 
     const partyData = {
-    userOrganizer : auth.currentUser?.username,
-    title: title,
-    description: description,
-    mood: mood,
-    category: category,
-    latitude: latitude,
-    longitude: longitude,
-    date: date,    
-    privateParty: privateParty,
-    guests: guests,
-    state: "active",
-    messages: []
-    }    
+      userOrganizer: auth.currentUser?.username,
+      title: title,
+      description: description,
+      category: category,
+      latitude: latitude,
+      longitude: longitude,
+      address: address,
+      date: date,
+      privateParty: privateParty,
+      guests: guests,
+      state: "active",
+      messages: [],
+    };
 
-    var response
-    
     try {
-      response = await api.post('/parties', {
-        ...partyData
-    })
-  
-    if (response.status === 200) {
-      // Get users who follows me
-     const url = `/users?userFollowed=${auth.currentUser?.username}`
-
-     api({
-      method: "get",
-      url: url,
-      responseType: "json",
-    })
-      .then(function (response) {
-        // For each guest, I send a notification of the party created
-        response.data.forEach((follower: any) => {
-
-          const newNotification = {
-            userOwner: follower.username,
-            datetime: new Date(),
-            message: `User ${auth.currentUser.username} has just created a new party "${title}"! Find it at page "Find your party"`,
-            invite: false,
-            partyID: null,
-            userToBeAccepted: null,
-            read: false
-          }
-
-            api({
-              method: "post",
-              url: `/notifications`,
-              data: newNotification
-            })
-          .then()
-          .catch((error) => console.log(error)); //do nothing
-        });
-      })
-      .catch((error) => console.log(error)); //do nothing
-
-      navigate("/myparties");
-    }
+      const response = await api.post("/parties", { ...partyData });
+      if (response.status === 200) {
+        navigate("/myparties");
+      }
     } catch (error) {
-      response && setError(response.data.message)
+      setError("An error occurred while creating the party.");
     }
-
-  };
+  }
 
   return (
     <div>
       <div className="backgroundContainer">
-      <Container>
-      <Form onSubmit={onCreate}>
-      <Form.Group className="mb-3" controlId="basicData">
-        <Form.Label>Title of your party</Form.Label>
-        <Form.Control type="text" placeholder="Enter description" onChange={(e) => setTitle(e.target.value)}/>
-        <Form.Label>Mood of the party!</Form.Label>
-        <Form.Control type="input" placeholder="Just anything: one keyword, one slogan..." onChange={(e) => setMood(e.target.value)}/>
-        <Form.Label>Full description of your party</Form.Label> <br />
-        <Form.Label>(Please specify also the location of the party, as just your geolocation will be saved)</Form.Label>
-        <Form.Control as="textarea" rows={3} onChange={(e) => setDescription(e.target.value)}/>       
-        <Form.Label>Date of the party</Form.Label>
-        <Form.Control type="date" onChange={(e) => setDate(e.target.value)}/>  
-        <Form.Label>Genre of music</Form.Label>
-        <Form.Select aria-label="Default select example" onChange={(e) => setCategory(e.target.value)}>
-          <option value="Commercial">Commercial</option>
-          <option value="Tech-house">Tech-house</option>
-          <option value="Raggae">Raggae</option>
-          <option value="Hip-hop">Hip-hop</option>
-        </Form.Select>
-      </Form.Group>  
-      <Form.Group className="mb-2" controlId="accessData">
-        <Form.Group className="mb-2" controlId="privateOrPublic">
-          <Form.Check name="access" inline type="radio" label="Private" onChange={(e) => e.target.value ? setPrivateParty(true) : setPrivateParty(false)}/>
-          <Form.Check name="access" inline type="radio" label="Public" onChange={(e) => e.target.value ? setPrivateParty(false) : setPrivateParty(true)}/>
-        </Form.Group>
-        <Form.Group className="mb-2" controlId="location">
-        <Button variant="info" onClick={() => pickLocation()}>Pick your location for the party</Button><br />
-          {latitude && longitude && <><Form.Label>Your current position: {latitude} {longitude}</Form.Label></>}
-        </Form.Group>
-      </Form.Group>      
-      <Button variant="info" type="submit">
-        Confirm
-      </Button>  
-    </Form>
-    <Form.Label className="errorLabel">{error}</Form.Label>
-    </Container>   
+        <Container>
+          <Form onSubmit={onCreate}>
+            <Form.Group className="mb-3" controlId="basicData">
+              <Form.Label>Title of your party</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter description"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <Form.Label>Full description of your party</Form.Label> <br />
+              <Form.Control as="textarea" rows={3} onChange={(e) => setDescription(e.target.value)} />
+              <Form.Label>Date of the party</Form.Label>
+              <Form.Control type="date" onChange={(e) => setDate(e.target.value)} />
+              <Form.Label>Genre of music</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="Commercial">Commercial</option>
+                <option value="Tech-house">Tech-house</option>
+                <option value="Raggae">Raggae</option>
+                <option value="Hip-hop">Hip-hop</option>
+              </Form.Select>
+            </Form.Group>
+
+            {/* Google Maps Autocomplete */}
+            <LoadScript googleMapsApiKey="AIzaSyDngUX_tiz4yev5YOyeTCAtAwd2CQGcKoQ" libraries={["places"]}>
+              <Form.Group className="mb-3" controlId="location">
+                <Form.Label>Pick your party location</Form.Label>
+                <Autocomplete onLoad={onLoadAutocomplete} onPlaceChanged={onPlaceChanged}>
+                  <Form.Control type="text" placeholder="Enter location" />
+                </Autocomplete>
+                {latitude && longitude && (
+                  <>
+                    <Form.Label>
+                      Selected Location: {address} (Lat: {latitude}, Lng: {longitude})
+                    </Form.Label>
+                  </>
+                )}
+              </Form.Group>
+            </LoadScript>
+
+            <Form.Group className="mb-2" controlId="privateOrPublic">
+              <Form.Check
+                name="access"
+                inline
+                type="radio"
+                label="Private"
+                onChange={(e) => (e.target.value ? setPrivateParty(true) : setPrivateParty(false))}
+              />
+              <Form.Check
+                name="access"
+                inline
+                type="radio"
+                label="Public"
+                onChange={(e) => (e.target.value ? setPrivateParty(false) : setPrivateParty(true))}
+              />
+            </Form.Group>
+            <Button variant="info" type="submit">
+              Confirm
+            </Button>
+          </Form>
+          <Form.Label className="errorLabel">{error}</Form.Label>
+        </Container>
+      </div>
+      <Footer />
     </div>
-       <Footer />
-       </div>
   );
 };
