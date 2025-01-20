@@ -135,9 +135,7 @@ form {
 }
 
 .backgroundContainer {
-  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   background-image: url("./img/background.png");
   background-size: cover;
   background-position: center;
@@ -156,9 +154,7 @@ form {
   }
   
   .backgroundContainer {
-  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   background-image: url("./img/background-mobile.png");
   background-size: cover;
   background-position: center;
