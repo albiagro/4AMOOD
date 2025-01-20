@@ -137,6 +137,8 @@ module.exports = function (app) {
           { _id: partyID },
           { state: req.body.state} 
         )
+        
+        return res.status(200).json({ message: "Party deleted successfully!" });
       }
 
       // Messages betweend users on party's details
