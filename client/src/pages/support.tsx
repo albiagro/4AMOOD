@@ -50,7 +50,7 @@ useLayoutEffect(() => {
         <Form.Label>E-mail</Form.Label>
         <Form.Control type="email" placeholder="Enter your e-mail" name="email"/>
         <Form.Label>Your message</Form.Label>
-        <Form.Control as="textarea" rows={3} name="message"/>
+        <Form.Control as="textarea" rows={3} name="message"/> <br />
       <Button variant="info" type="submit">
         Send message
       </Button>  
