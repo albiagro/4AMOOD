@@ -96,11 +96,11 @@ export const CreateParty = ({
               <Form.Label>Title of your party</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter description"
+                placeholder="Enter title"
                 onChange={(e) => setTitle(e.target.value)}
               />
               <Form.Label>Full description of your party</Form.Label> <br />
-              <Form.Control as="textarea" rows={3} onChange={(e) => setDescription(e.target.value)} />
+              <Form.Control as="textarea" placeholder="Enter description" rows={3} onChange={(e) => setDescription(e.target.value)} />
               <Form.Label>Date of the party</Form.Label>
               <Form.Control type="date" onChange={(e) => setDate(e.target.value)} />
               <Form.Label>Genre of music</Form.Label>

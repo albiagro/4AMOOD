@@ -1,7 +1,6 @@
 import React, { useLayoutEffect} from 'react';
 import { Footer } from '../components/footer';
 import { Alert, Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 export const About = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -9,44 +8,37 @@ export const About = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Se
     setShowNavbar(true);
     // eslint-disable-next-line
   }, [])
-
-  const auth = useSelector((state: any) => state.auth);
   
   return (
     <div>
       <div className="backgroundContainer">
       <Container>
-      {auth.currentUser ? <Alert variant="primary">
-      <Alert.Heading>Hey, {auth.currentUser.username}, Welcome back to <b>4AMood</b>! 🎉</Alert.Heading>
-      <p>
-      We’re thrilled to have you back! Ready to dive into the party scene?
-      </p>
+      <Alert variant="primary">
+      <Alert.Heading>About 4AMood: Find Your Party</Alert.Heading>
+      <p><b>What is 4AMood?</b></p>
+      <p>4AMood is a dynamic web app designed to bring people together for the ultimate party experience. Whether you're planning a massive celebration or an intimate private gathering, 4AMood serves as a social network and meeting point for young individuals looking to connect and create unforgettable events.</p> <br/>
+
+      <p><b>Who created 4AMood?</b></p>
+      <p>4AMood was created by Alberto Agrò as part of an innovative project. Alberto envisioned a platform where young people could seamlessly organize and discover parties, making it easier than ever to celebrate life's best moments.</p> <br/>
+
+      <p><b>How does 4AMood work?</b></p>
+      <p>The platform allows users to:
+
       <ul>
-      <li><b>Find your next adventure</b> in the <b>"Find Your Party"</b> menu, where you can explore the hottest events happening near you.</li>
-      <li><b>Create unforgettable memories</b> by organizing your own event through the <b>"My Parties"</b> menu—whether it's a private get-together or a public bash, the spotlight is yours!</li>
-    </ul>
-      <hr />
-      <p className="mb-0">
-      The night is yours to shape. Let’s keep the energy high and the good times rolling! 🎶✨
-      </p>
-    </Alert> :
-    <Alert variant="primary">
-    <Alert.Heading>Welcome to <b>4AMood</b>! 🎉</Alert.Heading>
-    <p>
-    Your ultimate hub for unforgettable parties and social connections is here!
-    </p>
-    <p><b>4AMood</b> is the perfect platform to:</p>
-    <ul>
-      <li><b>Organize your own parties</b>: Whether private or public, create memorable events and share them with your friends or the community.</li>
-      <li><b>Discover local events</b>: Explore active parties in your area and join the vibe that matches your mood.</li>
-      <li><b>Follow and connect</b>: Stay in sync with friends and party hosts by following their profiles, and get real-time notifications when they announce new events.</li>
-    </ul>
-    <p>4AMood is where your night begins, connections are made, and memories are created.</p>
-    <hr />
-    <p className="mb-0">
-    So, what are you waiting for? Let’s set the mood and keep the party going! 🎶✨
-    </p>
-  </Alert>}
+      <li>Organize events: Create, customize, and share invitations for your next big bash or cozy hangout.</li>
+      <li>Discover parties: Explore public events happening nearby and join the fun.</li>
+      <li>Connect with others: Chat with fellow party-goers, share ideas, and build your network of party enthusiasts.</li>
+      </ul></p><br/>
+
+      <p><b>What makes 4AMood unique?</b></p>
+      <p>4AMood stands out as a blend of social networking and event organization. It's more than just a tool; it's a vibrant community of young people who love celebrating and making connections.</p><br/>
+
+      <p><b>Who is 4AMood for?</b></p>
+      <p>The app is perfect for anyone who loves hosting or attending parties, from outgoing extroverts looking for the next big event to meticulous planners crafting the perfect private soirée.</p><br/>
+
+      <p><b>How can I get started?</b></p>
+      <p>Joining 4AMood is easy! Simply sign up, create your profile, and start planning or exploring parties. It's free, fun, and designed with you in mind.</p>
+    </Alert>
       </Container>
       </div>
      <Footer />

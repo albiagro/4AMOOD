@@ -52,6 +52,12 @@ export const MyNavBar = () => {
             </Nav.Link>
             </>
             }
+            <Nav.Link href="/support">
+              <p className="links"> Contacts </p>
+            </Nav.Link>
+            <Nav.Link href="/about">
+              <p className="links"> About </p>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
