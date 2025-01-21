@@ -21,7 +21,9 @@ useLayoutEffect(() => {
     // you could alert the user or throw an Error, here
     if (currentForm == null) return;
 
-    const email_key = process.env.EMAILJS_KEY
+    const email_key = process.env.REACT_APP_EMAILJS_KEY
+
+    console.log(email_key)
 
     if (email_key == null) return;
 
@@ -43,15 +45,15 @@ useLayoutEffect(() => {
     <div>
       <div className="backgroundContainer">
       <Card className="myCard" bg="info">
-                  <Card.Body>
-                    <Card.Title>
-                      Get in touch!
-                    </Card.Title>
-                    <Card.Text>
-                      Contact us for any issue or suggestion.
-                    </Card.Text>
-                  </Card.Body>
-                </Card> <br/>
+      <Card.Body>
+        <Card.Title>
+          Get in touch!
+        </Card.Title>
+        <Card.Text>
+          Contact us for any issue or suggestion.
+        </Card.Text>
+      </Card.Body>
+    </Card> <br/>
       <Form ref={form} onSubmit={sendEmail}>
         <Form.Label>Name</Form.Label>
         <Form.Control type="input" placeholder="Enter name" name="from_name"/>
