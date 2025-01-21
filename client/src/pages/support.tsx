@@ -1,53 +1,60 @@
-import React, { useLayoutEffect} from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { Footer } from '../components/footer';
-import { Alert, Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Button, Form } from 'react-bootstrap';
 
 export const Support = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
-  useLayoutEffect(() => {
+useLayoutEffect(() => {
     setShowNavbar(true);
     // eslint-disable-next-line
   }, [])
 
-  const auth = useSelector((state: any) => state.auth);
-  
+  const form = useRef(null);
+
+  const sendEmail = (e : any) => {
+    e.preventDefault();
+
+    const currentForm = form.current;
+    // this prevents sending emails if there is no form.
+    // in case currentForm cannot possibly ever be null,
+    // you could alert the user or throw an Error, here
+    if (currentForm == null) return;
+
+    const email_key = process.env.EMAILJS_KEY
+
+    if (email_key == null) return;
+
+    emailjs.sendForm("service_552ms1d", 'template_090i7aw', currentForm, {
+        publicKey: email_key,
+      })
+      .then(
+        () => {
+          alert("Message successfully sent. We will reach you very soon.");
+        },
+        (error : any) => {
+          alert("An error occurred while sending your message. Error: " + error.text)
+        },
+      );
+  };
+
+
   return (
     <div>
       <div className="backgroundContainer">
-      <Container>
-      {auth.currentUser ? <Alert variant="primary">
-      <Alert.Heading>Hey, {auth.currentUser.username}, Welcome back to <b>4AMood</b>! 🎉</Alert.Heading>
-      <p>
-      We’re thrilled to have you back! Ready to dive into the party scene?
-      </p>
-      <ul>
-      <li><b>Find your next adventure</b> in the <b>"Find Your Party"</b> menu, where you can explore the hottest events happening near you.</li>
-      <li><b>Create unforgettable memories</b> by organizing your own event through the <b>"My Parties"</b> menu—whether it's a private get-together or a public bash, the spotlight is yours!</li>
-    </ul>
-      <hr />
-      <p className="mb-0">
-      The night is yours to shape. Let’s keep the energy high and the good times rolling! 🎶✨
-      </p>
-    </Alert> :
-    <Alert variant="primary">
-    <Alert.Heading>Welcome to <b>4AMood</b>! 🎉</Alert.Heading>
-    <p>
-    Your ultimate hub for unforgettable parties and social connections is here!
-    </p>
-    <p><b>4AMood</b> is the perfect platform to:</p>
-    <ul>
-      <li><b>Organize your own parties</b>: Whether private or public, create memorable events and share them with your friends or the community.</li>
-      <li><b>Discover local events</b>: Explore active parties in your area and join the vibe that matches your mood.</li>
-      <li><b>Follow and connect</b>: Stay in sync with friends and party hosts by following their profiles, and get real-time notifications when they announce new events.</li>
-    </ul>
-    <p>4AMood is where your night begins, connections are made, and memories are created.</p>
-    <hr />
-    <p className="mb-0">
-    So, what are you waiting for? Let’s set the mood and keep the party going! 🎶✨
-    </p>
-  </Alert>}
-      </Container>
+      <Form ref={form} onSubmit={sendEmail}>
+        <Form.Label>Name</Form.Label>
+        <Form.Control type="input" placeholder="Enter name" name="from_name"/>
+        <Form.Label>Surname</Form.Label>
+        <Form.Control type="input" placeholder="Enter surname" name="from_lastname"/>
+        <Form.Label>E-mail</Form.Label>
+        <Form.Control type="email" placeholder="Enter your e-mail" name="email"/>
+        <Form.Label>Your message</Form.Label>
+        <Form.Control as="textarea" rows={3} name="message"/>
+      <Button variant="info" type="submit">
+        Send message
+      </Button>  
+    </Form>
       </div>
      <Footer />
      </div>
