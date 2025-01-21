@@ -13,6 +13,7 @@ export interface IParty {
   category: String;
   latitude: String;
   longitude: String;
+  address: String;
   date: Date;
   privateParty: Boolean;
   guests: IGuest[];

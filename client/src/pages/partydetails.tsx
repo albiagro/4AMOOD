@@ -97,6 +97,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                       <br />
                       Description: <i>{partyDetails?.description}</i>
                       <br />
+                      Location: <b>{partyDetails?.address}</b> <br />
                       Category: <b>{partyDetails?.category}</b> <br />
                       State: <b>{partyDetails?.state}</b>
                     </Card.Text>
