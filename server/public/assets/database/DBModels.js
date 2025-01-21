@@ -20,6 +20,7 @@ var partySchema = new mongoose.Schema({
     category: String,
     latitude: String,
     longitude: String,
+    address: String,
     date: Date,    
     privateParty: Boolean,
     guests: Array,
