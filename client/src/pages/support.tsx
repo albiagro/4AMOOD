@@ -23,8 +23,6 @@ useLayoutEffect(() => {
 
     const email_key = process.env.REACT_APP_EMAILJS_KEY
 
-    console.log(email_key)
-
     if (email_key == null) return;
 
     emailjs.sendForm("service_552ms1d", 'template_090i7aw', currentForm, {
