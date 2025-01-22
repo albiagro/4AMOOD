@@ -15,7 +15,7 @@ useLayoutEffect(() => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const form = useRef(null);
+  const form = useRef<any>(null);
 
   const sendEmail = (e : any) => {
     e.preventDefault();
@@ -36,10 +36,11 @@ useLayoutEffect(() => {
       .then(
         () => {
           alert("Message successfully sent. We will reach you very soon.");
+          currentForm.reset()
         },
         (error : any) => {
           alert("An error occurred while sending your message. Error: " + error.text)
-        },
+        },        
       );
   };
 
