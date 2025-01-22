@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Footer } from '../components/footer';
 import { Button, Card, Form } from 'react-bootstrap';
@@ -9,6 +9,11 @@ useLayoutEffect(() => {
     setShowNavbar(true);
     // eslint-disable-next-line
   }, [])
+
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const form = useRef(null);
 
@@ -38,6 +43,9 @@ useLayoutEffect(() => {
       );
   };
 
+  function isButtonEnabled() : boolean {
+    return name != "" && surname != "" && email != "" && message != ""
+  }
 
   return (
     <div>
@@ -54,14 +62,14 @@ useLayoutEffect(() => {
     </Card> <br/>
       <Form ref={form} onSubmit={sendEmail}>
         <Form.Label>Name</Form.Label>
-        <Form.Control type="input" placeholder="Enter name" name="from_name"/>
+        <Form.Control type="input" placeholder="Enter name" name="from_name" onChange={(e) => setName(e.target.value)}/>
         <Form.Label>Surname</Form.Label>
-        <Form.Control type="input" placeholder="Enter surname" name="from_lastname"/>
+        <Form.Control type="input" placeholder="Enter surname" name="from_lastname" onChange={(e) => setSurname(e.target.value)}/>
         <Form.Label>E-mail</Form.Label>
-        <Form.Control type="email" placeholder="Enter your e-mail" name="email"/>
+        <Form.Control type="email" placeholder="Enter your e-mail" name="email" onChange={(e) => setEmail(e.target.value)}/>
         <Form.Label>Your message</Form.Label>
-        <Form.Control as="textarea" placeholder="Enter your message..." rows={3} name="message"/> <br />
-      <Button variant="info" type="submit">
+        <Form.Control as="textarea" placeholder="Enter your message..." rows={3} name="message" onChange={(e) => setMessage(e.target.value)}/> <br />
+      <Button variant="info" type="submit" disable={isButtonEnabled()}>
         Send message
       </Button>  
     </Form>
