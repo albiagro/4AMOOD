@@ -69,7 +69,7 @@ useLayoutEffect(() => {
         <Form.Control type="email" placeholder="Enter your e-mail" name="email" onChange={(e) => setEmail(e.target.value)}/>
         <Form.Label>Your message</Form.Label>
         <Form.Control as="textarea" placeholder="Enter your message..." rows={3} name="message" onChange={(e) => setMessage(e.target.value)}/> <br />
-      <Button variant="info" type="submit" disable={true}>
+      <Button variant="info" type="submit" disabled={isButtonEnabled()}>
         Send message
       </Button>  
     </Form>
