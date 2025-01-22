@@ -44,7 +44,7 @@ useLayoutEffect(() => {
   };
 
   function isButtonEnabled() : boolean {
-    return name == "" && surname == "" && email == "" && message == ""
+    return !(name != "" && surname != "" && email != "" && message != "")
   }
 
   return (
