@@ -10,7 +10,7 @@ The platform allows users to:
 
 - Organize events: Create, customize, and share invitations for your next big bash or cozy hangout.
 - Discover parties: Explore public events happening nearby and join the fun.
-- Connect with others: Chat with fellow party-goers, follow other users to stay updated about parties around you.
+- Connect with others: Chat with fellow party-goers to create hype before a party or to review it afterwards, follow other users to stay updated about parties around you.
 
 ## What makes 4AMood unique?
 4AMood stands out as a blend of social networking and event organization. It's more than just a tool; it's a vibrant community of young people who love celebrating and making connections.
