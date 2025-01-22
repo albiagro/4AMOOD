@@ -27,7 +27,7 @@ export const About = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Se
       <ul>
       <li>Organize events: Create, customize, and share invitations for your next big bash or cozy hangout.</li>
       <li>Discover parties: Explore public events happening nearby and join the fun.</li>
-      <li>Connect with others: Chat with fellow party-goers, share ideas, and build your network of party enthusiasts.</li>
+      <li>Connect with others: Chat with fellow party-goers to create hype before a party or to review it afterwards, follow other users to stay updated about parties around you.</li>
       </ul></p><br/>
 
       <p><b>What makes 4AMood unique?</b></p>

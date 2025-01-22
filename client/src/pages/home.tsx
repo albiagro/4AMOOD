@@ -24,6 +24,7 @@ export const Home = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
       <ul>
       <li><b>Find your next adventure</b> in the <b>"Find Your Party"</b> menu, where you can explore the hottest events happening near you.</li>
       <li><b>Create unforgettable memories</b> by organizing your own event through the <b>"My Parties"</b> menu—whether it's a private get-together or a public bash, the spotlight is yours!</li>
+      <li><b>Follow and connect</b>: Stay in sync with friends and party hosts by following their profiles, and get real-time notifications when they announce new events. Just click on others users' username to view and follow him/her!</li>
     </ul>
       <hr />
       <p className="mb-0">
