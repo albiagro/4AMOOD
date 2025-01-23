@@ -267,7 +267,6 @@ module.exports = function (app) {
     // Verifying the JWT token 
     jwt.verify(token, process.env.TOKEN_KEY, async function(err, decoded) {
         if (err) {
-            console.log(err);
             return res.json({ message: "Email verification failed, possibly the link is invalid or expired!" });
         }
         else {

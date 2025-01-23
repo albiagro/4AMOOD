@@ -13,7 +13,6 @@ export const VerifyEmail = ({setShowNavbar} : {setShowNavbar : React.Dispatch<Re
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    console.log(window.location.pathname)
     verifyToken();
         // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

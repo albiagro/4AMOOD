@@ -10,5 +10,5 @@ module.exports.createSecretToken = (id) => {
 module.exports.createRandomToken = () => {
   return jwt.sign({
     data: 'Token Data'  
-}, process.env.TOKEN_KEY, { expiresIn: '10m' })
+}, process.env.TOKEN_KEY, { expiresIn: 3 * 24 * 60 * 60 })
 };
