@@ -258,5 +258,24 @@ module.exports = function (app) {
     )
 
   })
+
+  app.get('/verify/:token', (req, res)=>{
+    const {token} = req.params;
+
+    // Verifying the JWT token 
+    jwt.verify(token, process.env.TOKEN_KEY, async function(err, decoded) {
+        if (err) {
+            console.log(err);
+            return res.status(400).json({ message: "Email verification failed, possibly the link is invalid or expired!" });
+        }
+        else {
+          await DBModels.User.findOneAndUpdate(
+            { validationToken: token },
+            { validationToken: "", active: true }
+          )
+          return res.status(200).json({ message: "Email verified successfully!" });
+        }
+    });
+});
   
 };

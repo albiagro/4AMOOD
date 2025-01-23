@@ -26,21 +26,19 @@ module.exports.sendEmailVerification = (emailTo, name, token) => {
         // This would be the text of email body
         text: `Hi ${name}, Welcome To 4AMood!
 
-               Please follow the given link to verify your email
-               https://fouramood.netlify.app/verify/${token} and activate your account.
+        Please follow the given link to verify your email and activate your account:
+        https://fouramood.netlify.app/verify/${token} 
 
-               We hope you will enjoy your experience at 4AMood!
-               
-               Kind Regards,
-               4AMood Support`
+        We hope you will enjoy your experience at 4AMood!
+        
+        Kind Regards,
+        4AMood Support`
     };
     
 
 
     transporter.sendMail(mailConfigurations, function(error, info){
         if (error) console.log(error)
-        console.log('Email Sent Successfully');
-        console.log(info);
     });
 }
 

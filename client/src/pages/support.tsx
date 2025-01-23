@@ -30,7 +30,7 @@ useLayoutEffect(() => {
 
     if (email_key == null) return;
 
-    emailjs.sendForm("service_552ms1d", 'template_090i7aw', currentForm, {
+    emailjs.sendForm("service_552ms1d", 'template_tsm2gqh', currentForm, {
         publicKey: email_key,
       })
       .then(
