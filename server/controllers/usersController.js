@@ -259,8 +259,10 @@ module.exports = function (app) {
 
   })
 
-  app.get('/verify/:token', (req, res)=>{
+  app.get('https://fouramood.netlify.app/verify/:token', (req, res)=>{
     const {token} = req.params;
+
+    console.log(token)
 
     // Verifying the JWT token 
     jwt.verify(token, process.env.TOKEN_KEY, async function(err, decoded) {
