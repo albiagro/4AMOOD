@@ -13,7 +13,7 @@ export const VerifyEmail = ({setShowNavbar} : {setShowNavbar : React.Dispatch<Re
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    console.log(window.location.href)
+    console.log(window.location.pathname)
     verifyToken();
         // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -21,7 +21,7 @@ export const VerifyEmail = ({setShowNavbar} : {setShowNavbar : React.Dispatch<Re
   const verifyToken = () => {
     api({
       method: "get",
-      url: window.location.href,
+      url: window.location.pathname,
       responseType: "json",
     })
       .then(function (response) {

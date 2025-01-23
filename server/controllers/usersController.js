@@ -259,7 +259,7 @@ module.exports = function (app) {
 
   })
 
-  app.get('*/verify/:token', (req, res)=>{
+  app.get('/verify/:token', (req, res)=>{
     const {token} = req.params;
 
     console.log(token)
