@@ -2,10 +2,12 @@ const nodemailer = require('nodemailer');
 require('dotenv').config()
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.zoho.eu',
+    port: 465,
+    secure: true, //ssl
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PSW
+        user:process.env.EMAIL_USER,
+        pass:process.env.EMAIL_PSW
     }
 });
 
@@ -33,8 +35,10 @@ module.exports.sendEmailVerification = (emailTo, name, token) => {
                4AMood Support`
     };
     
+
+
     transporter.sendMail(mailConfigurations, function(error, info){
-        if (error) throw Error(error);
+        if (error) console.log(error)
         console.log('Email Sent Successfully');
         console.log(info);
     });
