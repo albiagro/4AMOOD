@@ -6,3 +6,9 @@ module.exports.createSecretToken = (id) => {
     expiresIn: 3 * 24 * 60 * 60,
   });
 };
+
+module.exports.createRandomToken = () => {
+  return jwt.sign({
+    data: 'Token Data'  
+}, 'ourSecretKey', { expiresIn: '10m' })
+};

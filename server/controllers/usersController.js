@@ -4,10 +4,12 @@ var ConnectDB = require("../public/assets/database/DBConnection.js");
 var DBModels = require("../public/assets/database/DBModels.js");
 const {
   createSecretToken,
+  createRandomToken,
 } = require("../public/assets/token/generateToken.js");
 const bcrypt = require("bcrypt");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
+const { sendEmailVerification } = require("../public/assets/emails/emailSender.js");
 
 env.config();
 
@@ -83,6 +85,9 @@ module.exports = function (app) {
         read: false
       })
 
+      //Random token in order to validate user's email
+      const tokenForEmailValidation = createRandomToken();
+
       const newUser = new DBModels.User({
         name: req.body.name,
         surname: req.body.surname,
@@ -91,17 +96,21 @@ module.exports = function (app) {
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
-        following: []
+        following: [],
+        active: false,
+        validationToken: tokenForEmailValidation
       });
 
       const user = await newUser.save();
       await newNotification.save();
-      const token = createSecretToken(user._id);
+      const token = createSecretToken(user._id);     
 
       const userCreated = {
         ...user._doc,
         token: token,
       };
+
+      sendEmailVerification(req.body.email, req.body.name, tokenForEmailValidation);
 
       res.json(userCreated);
     } catch (error) {

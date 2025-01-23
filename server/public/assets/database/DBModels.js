@@ -9,7 +9,9 @@ var userSchema = new mongoose.Schema({
     username: String,
     password: String,
     email: String,
-    following: Array
+    following: Array,
+    validationToken: String,
+    active: Boolean,
 });
 
 //Party schema and model
