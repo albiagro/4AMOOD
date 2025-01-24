@@ -181,7 +181,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 <Container>
     <Row xs={1} md={3} className="g-8">
         <Col>
-        <Card className="userCard" >
+        <Card >
       <Card.Img variant="top" src={avatarImgSrc} />
       <Card.Body>
       <Card.Title>{auth.currentUser?.username} </Card.Title>
