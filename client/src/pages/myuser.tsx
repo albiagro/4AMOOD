@@ -157,6 +157,17 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   const openPartyDetails = (partyID : String) => {
     navigate(`/parties/${partyID}`, {state:{partyID: partyID}})
   }
+
+  const sendNewVerificationLink = async function() {
+    api({
+      method: "post",
+      url: `/verify/${auth.currentUser?.username}`,
+      data: {name: auth.currentUser?.name, email: auth.currentUser?.email}
+    })
+    .then(function (response) {
+      alert(response.data.message);
+    })
+  }
   
   return (
     <div>
@@ -184,7 +195,9 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
       <Form.Label>Username</Form.Label>
         <Form.Control {...props} type="password" defaultValue={auth.currentUser?.password} onChange={(e) => setPassword(e.target.value)}/>
         <Form.Label>Email address</Form.Label>
-        <Form.Control {...props} type="email" defaultValue={auth.currentUser?.email} onChange={(e) => setEmail(e.target.value)}/>
+        <Form.Control {...props} type="email" defaultValue={auth.currentUser?.email} onChange={(e) => setEmail(e.target.value)}/> <br />
+          <Form.Label style={{color:"black"}}>Email verified {auth.currentUser?.active ? "✔️" : "❌"}</Form.Label>
+          {!auth.currentUser?.active && <Button variant="info" onClick={() => sendNewVerificationLink()}>Send new verification link</Button>}
         <Form.Text className="text-muted">
         </Form.Text>
       </Form.Group>  

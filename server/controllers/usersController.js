@@ -262,8 +262,6 @@ module.exports = function (app) {
   app.get('/verify/:token', (req, res)=>{
     const {token} = req.params;
 
-    console.log(token)
-
     // Verifying the JWT token 
     jwt.verify(token, process.env.TOKEN_KEY, async function(err, decoded) {
         if (err) {
@@ -277,6 +275,31 @@ module.exports = function (app) {
           return res.json({ message: "Email verified successfully!" });
         }
     });
+});
+
+app.post('/verify/:username', async function (req, res) {
+
+  try {
+    const {username} = req.params;
+
+  const tokenForEmailValidation = createRandomToken();
+
+  await DBModels.User.findOneAndUpdate(
+    { username: username },
+    { validationToken: tokenForEmailValidation}
+  )
+
+  sendEmailVerification(req.body.email, req.body.name, tokenForEmailValidation);
+
+  return res.json({ message: "New verification email sent!" });
+
+  } catch (error) {
+    
+    return res.json({ message: "Error while sending new verification email: " + error });
+  }
+  
+
+
 });
   
 };
