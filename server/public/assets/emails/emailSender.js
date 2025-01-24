@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports.sendEmailVerification = (emailTo, name, token) => {
+module.exports.sendGenericEmail = (emailTo, name, token) => {
 
     const mailConfigurations = {
 
@@ -35,6 +35,28 @@ module.exports.sendEmailVerification = (emailTo, name, token) => {
         4AMood Support`
     };
     
+
+
+    transporter.sendMail(mailConfigurations, function(error, info){
+        if (error) console.log(error)
+    });
+}
+
+module.exports.sendGenericEmail = (emailTo, subject, message) => {
+
+    const mailConfigurations = {
+
+        // It should be a string of sender/server email
+        from: process.env.EMAIL_USER,
+    
+        to: emailTo,
+    
+        // Subject of Email
+        subject: subject,
+        
+        // This would be the text of email body
+        text: message
+    };    
 
 
     transporter.sendMail(mailConfigurations, function(error, info){

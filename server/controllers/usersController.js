@@ -9,7 +9,7 @@ const {
 const bcrypt = require("bcrypt");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
-const { sendEmailVerification } = require("../public/assets/emails/emailSender.js");
+const { sendGenericEmail: sendEmailVerification, sendGenericEmail } = require("../public/assets/emails/emailSender.js");
 
 env.config();
 
@@ -290,6 +290,28 @@ app.post('/verify/:username', jsonParser, async function (req, res) {
   )
 
   sendEmailVerification(req.body.email, req.body.name, tokenForEmailValidation);
+
+  return res.json({ message: "New verification email sent!" });
+
+  } catch (error) {
+    
+    return res.json({ message: "Error while sending new verification email: " + error });
+  }
+
+});
+
+app.post('/emails', jsonParser, async function (req, res) {
+
+  try {
+
+  const messageForEmail = `Hi ${req.body.name},
+
+        ${req.body.message}        
+        
+        Kind Regards,
+        4AMood Support`
+
+  sendGenericEmail(req.body.email, "4AMood - New follower", messageForEmail);
 
   return res.json({ message: "New verification email sent!" });
 

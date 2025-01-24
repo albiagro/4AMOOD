@@ -68,10 +68,12 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     }
     else
     {
+      const message = `User ${auth.currentUser?.username} is now following you! A notification for your new parties will be automatically sent to ${auth.currentUser?.username}.`
+
       const newNotification = {
         userOwner: usernameToSearch,
         datetime: new Date(),
-        message: `User ${auth.currentUser?.username} is now following you! A notification for your new parties will be automatically sent to ${auth.currentUser?.username}.`,
+        message: message,
         invite: false,
         partyID: null,
         userToBeAccepted: null,
@@ -88,6 +90,11 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
           method: "post",
           url: `/notifications`,
           data: newNotification
+        }),
+        api({
+          method: "post",
+          url: `/emails`,
+          data: {name: auth.currentUser?.name, email: auth.currentUser?.email, message: message}
         })
       ]).then()
       .catch((error) => console.log(error)); //do nothing
