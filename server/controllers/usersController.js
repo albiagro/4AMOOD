@@ -277,7 +277,7 @@ module.exports = function (app) {
     });
 });
 
-app.post('/verify/:username', async function (req, res) {
+app.post('/verify/:username', jsonParser, async function (req, res) {
 
   try {
     const {username} = req.params;
