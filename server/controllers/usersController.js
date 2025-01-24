@@ -307,11 +307,11 @@ app.post('/emails', jsonParser, async function (req, res) {
     const user = await DBModels.User.findOne({username: req.body.username})
 
   const messageForEmail = `Hi ${user.name},
-
-        ${req.body.message}        
+  
+${req.body.message}        
         
-        Kind Regards,
-        4AMood Support`
+Kind Regards,
+4AMood Support`
 
   sendGenericEmail(user.email, "4AMood - New follower", messageForEmail);
 

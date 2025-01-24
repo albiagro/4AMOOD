@@ -26,13 +26,13 @@ module.exports.sendGenericEmail = (emailTo, name, token) => {
         // This would be the text of email body
         text: `Hi ${name}, Welcome To 4AMood!
 
-        Please follow the given link to verify your email and activate your account:
-        https://fouramood.netlify.app/verify/${token} 
+Please follow the given link to verify your email and activate your account:
+https://fouramood.netlify.app/verify/${token} 
 
-        We hope you will enjoy your experience at 4AMood!
+We hope you will enjoy your experience at 4AMood!
         
-        Kind Regards,
-        4AMood Support`
+Kind Regards,
+4AMood Support`
     };
     
 
