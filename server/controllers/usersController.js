@@ -294,7 +294,7 @@ app.post('/verify/:username', jsonParser, async function (req, res) {
   return res.json({ message: "New verification email sent!" });
 
   } catch (error) {
-    
+    console.log(error)
     return res.json({ message: "Error while sending new verification email: " + error });
   }
 
@@ -304,20 +304,22 @@ app.post('/emails', jsonParser, async function (req, res) {
 
   try {
 
-  const messageForEmail = `Hi ${req.body.name},
+    const user = await DBModels.User.findOne({username: req.body.username})
+
+  const messageForEmail = `Hi ${user.name},
 
         ${req.body.message}        
         
         Kind Regards,
         4AMood Support`
 
-  sendGenericEmail(req.body.email, "4AMood - New follower", messageForEmail);
+  sendGenericEmail(user.email, "4AMood - New follower", messageForEmail);
 
-  return res.json({ message: "New verification email sent!" });
+  return res.json({ message: "Following notification sent!" });
 
   } catch (error) {
-    
-    return res.json({ message: "Error while sending new verification email: " + error });
+    console.log(error)
+    return res.json({ message: "Error while sending following notification: " + error });
   }
   
 
