@@ -9,7 +9,7 @@ const {
 const bcrypt = require("bcrypt");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
-const { sendGenericEmail: sendEmailVerification, sendGenericEmail } = require("../public/assets/emails/emailSender.js");
+const { sendEmailVerification, sendGenericEmail } = require("../public/assets/emails/emailSender.js");
 
 env.config();
 

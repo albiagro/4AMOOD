@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports.sendGenericEmail = (emailTo, name, token) => {
+export const sendEmailVerification = (emailTo, name, token) => {
 
     const mailConfigurations = {
 
@@ -42,7 +42,7 @@ Kind Regards,
     });
 }
 
-module.exports.sendGenericEmail = (emailTo, subject, message) => {
+export const sendGenericEmail = (emailTo, subject, message) => {
 
     const mailConfigurations = {
 
