@@ -140,12 +140,17 @@ export const MyParties = ({
           update their details or send invites!
         </p>
         <hr />
+        {auth.currentUser?.active ? 
         <p className="mb-0">
           Whenever you want, you can create new parties through the following
           button:
         </p>
+        :
+        <p className="mb-0">
+          It seems your email has not been verified yet. Please do it before create parties! If you did not receive the email or the verification link is not valid anymore, click on your avatar and send a new one!
+        </p>}
         <br />
-        <Button href="/createparty" id="btnCreateParty" variant="outline-info">
+        <Button disabled={!auth.currentUser?.active} href="/createparty" id="btnCreateParty" variant="dark">
           Let's organize a party!
         </Button>
       </Alert>
@@ -172,7 +177,7 @@ export const MyParties = ({
           button:
         </p>
         <br />
-        <Button href="/findyourparty" variant="outline-info">
+        <Button href="/findyourparty" variant="dark">
           Find your party!
         </Button>
       </Alert>
