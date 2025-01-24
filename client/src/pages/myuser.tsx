@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState} from 'react';
-import { Button, Card, Col, Form, Row, Toast, ToastContainer } from 'react-bootstrap';
+import { Button, Card, Col, Form, Row, Toast, ToastContainer, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import avatarM from '../img/avatarM.png'
@@ -178,7 +178,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
           <Navigate to="/home"></Navigate>
         </>
       )}
-
+<Container>
     <Row xs={1} md={3} className="g-8">
         <Col>
         <Card className="userCard" >
@@ -263,6 +263,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
           </Card>
         </Col>
     </Row>
+</Container>
     </div>
     <Footer />
     </div>
