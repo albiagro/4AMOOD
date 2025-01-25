@@ -120,6 +120,11 @@ form {
   width: 2%;
 }
 
+.scroll {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
 @media screen and (min-width: 500px) {
 
 .userCard {

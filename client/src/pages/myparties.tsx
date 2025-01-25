@@ -23,7 +23,8 @@ export interface IParty {
 
 export interface IMessage {
   username: String,
-  message: String
+  message: String,
+  timestamp: Date
 }
 
 export interface INotification {

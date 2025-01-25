@@ -41,7 +41,8 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
     e.preventDefault();    
     const newMessage : IMessage = {
       username: auth.currentUser.username,
-      message: message
+      message: message,
+      timestamp: new Date()
     }
 
     api({
@@ -137,7 +138,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                     <Card.Title>
                       Guests
                     </Card.Title>
-                    <Card.Text>
+                    <Card.Text className='scroll'>
                       {partyDetails?.guests.map((guest) => (
                         <>    
                         {guest.sex === 'M' ? <img src={avatarM} alt='guestAvatar' height="30" width="30"/>
@@ -149,16 +150,18 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                 </Card>
               </Col>
               <Col>
-                <Card className="myCard" >
+                <Card className="myCard">
                   <Card.Body>
                     <Card.Title>
                       Messages
                     </Card.Title>
                     <Card.Text>
                       Post your message before or after the party to create hype! <br />
-                      Please be respectful of everyone. <br /><br />
+                      Please be respectful of everyone.
+                      </Card.Text> <br />
+                      <Card.Text className='scroll'>
                       {partyDetails?.messages?.map((message) => (
-                        <p><b>{message.username}: </b>{message.message}</p>
+                        <p><i>{message.timestamp.toLocaleString().split('T')[0]} {message.timestamp.toLocaleString().split('T')[1].split('.')[0]}</i> <b>{message.username}: </b>{message.message}</p>
                         ))}
                     </Card.Text>
                     <Form onSubmit={updateMessages}>
