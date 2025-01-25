@@ -221,7 +221,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
       <Card.Img variant="top" src={avatarImgSrc} />
       <Form onSubmit={handleSubmit}>
       <Form.Label style={{color:"black"}}>Update your user profile</Form.Label>
-      <Form.Control type="file" onChange={handleFileChange} accept='image/*'/><br />
+      <Form.Control type="file" onChange={handleFileChange} accept='image/*'/>
         <Button className="btnUser" variant="info" type="submit" size='sm'>Upload</Button>
       </Form>
       <Card.Body>
