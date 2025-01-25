@@ -30,7 +30,6 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   const [error, setError] = useState('')
 
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState<string | undefined | null>(null);
 
   const [notificationsList, setNotificationsList] = useState<INotification[] | null>(null);
 
@@ -59,7 +58,6 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
     // User's image preview
     const reader = new FileReader();
-    reader.onloadend = () => setPreview(reader.result?.toString());
     reader.readAsDataURL(selectedFile);
   };
 
@@ -224,7 +222,6 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
       <Form onSubmit={handleSubmit}>
       <Form.Label style={{color:"black"}}>Update your user profile</Form.Label>
       <Form.Control type="file" onChange={handleFileChange} accept='image/*'/>
-        {preview && <img src={preview} alt="img-preview" width="100" />}
         <Button className="btnUser" variant="info" type="submit" size='sm'>Upload</Button>
       </Form>
       <Card.Body>
