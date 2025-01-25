@@ -44,7 +44,7 @@ function App() {
           {auth.currentUser && <><Route path="/myparties" element={<MyParties setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/createparty" element={<CreateParty setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path="/findyourparty" element={<FindYourParty setShowNavbar={setShowNavbar} />} /> </> }
-          {auth.currentUser && <><Route path="/parties/*" element={<PartyDetails setShowNavbar={setShowNavbar} />} /> </> }
+          {auth.currentUser && <><Route path="/parties/:id" element={<PartyDetails setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path={`/users/*`} element={<User setShowNavbar={setShowNavbar} />} />  </> }
           <Route path="/about" element={<About setShowNavbar={setShowNavbar} />} />
           <Route path="/support" element={<Support setShowNavbar={setShowNavbar} />} />

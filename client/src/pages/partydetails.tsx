@@ -1,6 +1,6 @@
 import React, {  useEffect, useLayoutEffect, useState} from 'react';
 import { Footer } from '../components/footer';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { IMessage, IParty } from './myparties';
 import api from '../axios';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
@@ -25,7 +25,9 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
 
   const navigate = useNavigate();
 
-  const url = `/parties/${location.state.partyID}`
+  const { partyID } = useParams();
+
+  const url = `/parties/${partyID}`
 
   const getPartyDetails = () => {
     api({
