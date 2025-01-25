@@ -6,6 +6,7 @@ import { Footer } from "../components/footer";
 import { IGuest } from "./myparties";
 import api from "../axios";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
+import axios from "axios";
 
 export const CreateParty = ({
   setShowNavbar,
@@ -93,22 +94,30 @@ export const CreateParty = ({
         // For each guest, I send a notification of the party created
         response.data.forEach((follower: any) => {
 
+          const message = `User ${auth.currentUser.username} has just created a new party "${title}"! Find it at page "Find your party"`
+
           const newNotification = {
             userOwner: follower.username,
             datetime: new Date(),
-            message: `User ${auth.currentUser.username} has just created a new party "${title}"! Find it at page "Find your party"`,
+            message: message,
             invite: false,
             partyID: null,
             userToBeAccepted: null,
             read: false
           }
 
+          axios.all([
             api({
               method: "post",
               url: `/notifications`,
               data: newNotification
+            }),
+            api({
+              method: "post",
+              url: `/emails`,
+              data: {username: follower.username, message: message}
             })
-          .then()
+          ]).then()
           .catch((error) => console.log(error)); //do nothing
         });
       })
