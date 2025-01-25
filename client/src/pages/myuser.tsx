@@ -29,7 +29,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   const [buttonDescription, setButtonDescription] = useState('Edit')
   const [error, setError] = useState('')
 
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
 
   const [notificationsList, setNotificationsList] = useState<INotification[] | null>(null);
 
@@ -52,39 +52,39 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
   const dispatch = useDispatch<any>();
 
-  const handleFileChange = (e : any) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+  // const handleFileChange = (e : any) => {
+  //   const selectedFile = e.target.files[0];
+  //   setFile(selectedFile);
 
-    // User's image preview
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-  };
+  //   // User's image preview
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(selectedFile);
+  // };
 
-  // User's image new image update
-  const handleSubmit = async (e : any) => {
-    e.preventDefault();
+  // // User's image new image update
+  // const handleSubmit = async (e : any) => {
+  //   e.preventDefault();
 
-    if (!file) {
-      alert('You have not selected any file!');
-      return;
-    }
+  //   if (!file) {
+  //     alert('You have not selected any file!');
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    formData.append('profilePicture', file);
+  //   const formData = new FormData();
+  //   formData.append('profilePicture', file);
 
-    try {
-      const response = await api.post(`/users/upload/${auth.currentUser?.username}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      alert('Image has been successfully loaded!');
-      console.log(response.data);
-    } catch (error) {
-      console.error('Errore while loading users image:', error);
-    }
-  };
+  //   try {
+  //     const response = await api.post(`/users/upload/${auth.currentUser?.username}`, formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     });
+  //     alert('Image has been successfully loaded!');
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error('Errore while loading users image:', error);
+  //   }
+  // };
 
   const onSubmit = (e : any) => {
     e.preventDefault();
@@ -219,11 +219,11 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
         <Col>
         <Card >
       <Card.Img variant="top" src={avatarImgSrc} />
-      <Form onSubmit={handleSubmit}>
+      {/* <Form onSubmit={handleSubmit}>
       <Form.Label style={{color:"black"}}>Update your user profile</Form.Label>
       <Form.Control type="file" onChange={handleFileChange} accept='image/*'/>
         <Button className="btnUser" variant="info" type="submit" size='sm'>Upload</Button>
-      </Form>
+      </Form> */}
       <Card.Body>
       <Card.Title>{auth.currentUser?.username} </Card.Title>
         <Card.Text>
