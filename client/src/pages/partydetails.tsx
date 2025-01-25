@@ -3,7 +3,7 @@ import { Footer } from '../components/footer';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IMessage, IParty } from './myparties';
 import api from '../axios';
-import { Button, Card, Col, Form, Row } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Form, Row } from 'react-bootstrap';
 import partyImg from '../img/party.jpg'
 import avatarM from '../img/avatarM.png'
 import avatarF from '../img/avatarF.png'
@@ -73,12 +73,39 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
 
     navigate(urlToRedirect, {state:{user: guestUsername}})
   }
+
+  function userPartecipating() : boolean {
+    var userFound = false;
+
+    if (partyDetails?.privateParty) {
+      partyDetails?.guests.forEach(element => {
+        if (element.username === auth.currentUser?.username && element.accepted === true) 
+        {
+          userFound = true;
+        }      
+      });
+    }
+    else {
+      userFound = true;
+    }
+    return userFound;
+  }
   
   return (
     <div>
       <div className="backgroundContainer">
-        {partyDetails && (
+        {partyDetails && 
           <>
+            {partyDetails.privateParty && !userPartecipating() ?
+          <div>
+          <Alert variant="primary">
+            <Alert.Heading>Ooops! Not authorized</Alert.Heading>
+            You are trying to get details about a private party that you are not partecipating in.
+            Find the party at page "Find your party" and ask the organizer to approve you!
+          </Alert>{" "}
+          <br />
+          <Button href="/home">Go to home</Button>
+        </div> :
             <Row xs={1} md={3} className="g-8">
               <Col>
                 <Card className="myCard" >
@@ -145,8 +172,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                 </Card>
               </Col>
             </Row>
-          </>
-        )}
+        }</>}
       </div>
       <Footer />
     </div>
