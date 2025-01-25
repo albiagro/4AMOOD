@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const { sendEmailVerification} = require("../public/assets/emails/emailSender.js");
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 env.config();
 
@@ -17,7 +18,12 @@ ConnectDB();
 // Multer configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../uploads/'); // Folder in which save files
+
+    const uploadDir = path.resolve(__dirname, '/uploads');
+  if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+    cb(null, uploadDir); // Folder in which save files
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
