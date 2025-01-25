@@ -52,6 +52,8 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
   const dispatch = useDispatch<any>();
 
+  //TO BE COMPLETED: user profile's image update
+
   // const handleFileChange = (e : any) => {
   //   const selectedFile = e.target.files[0];
   //   setFile(selectedFile);
