@@ -110,7 +110,7 @@ export const CreateParty = ({
 
           // Message for email notification, with link of the party
 
-          message += `Find it here: https://fouramood.netlify.app/${partyCreated._id}`
+          message += `Find it here: https://fouramood.netlify.app/parties/${partyCreated._id}`
 
           axios.all([
             api({
