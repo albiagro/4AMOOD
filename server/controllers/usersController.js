@@ -250,6 +250,7 @@ module.exports = function (app) {
     
     const notificationID = req.query.ID
 
+    // User has read the notification
     await DBModels.Notification.findOneAndUpdate(
       { _id: notificationID },
       {
@@ -284,6 +285,7 @@ app.post('/verify/:username', jsonParser, async function (req, res) {
 
   const tokenForEmailValidation = createRandomToken();
 
+  // Updating DB in order to check then if token is passed correctly from frontend and so user can be validated
   await DBModels.User.findOneAndUpdate(
     { username: username },
     { validationToken: tokenForEmailValidation}
@@ -304,8 +306,10 @@ app.post('/emails', jsonParser, async function (req, res) {
 
   try {
 
+    // Finding the user with username provided, in order to get his/her email
     const user = await DBModels.User.findOne({username: req.body.username})
 
+    // Standard email for any email notification, to which I will append the message provided by frontend
   const messageForEmail = `Hi ${user.name},
   
 ${req.body.message}        
@@ -313,16 +317,14 @@ ${req.body.message}
 Kind Regards,
 4AMood Support`
 
-  sendGenericEmail(user.email, "4AMood - New follower", messageForEmail);
+  sendGenericEmail(user.email, req.body.subject, messageForEmail);
 
-  return res.json({ message: "Following notification sent!" });
+  return res.json({ message: "Email sent!" });
 
   } catch (error) {
     console.log(error)
-    return res.json({ message: "Error while sending following notification: " + error });
+    return res.json({ message: "Error while sending email: " + error });
   }
-  
-
 
 });
   

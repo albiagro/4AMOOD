@@ -94,7 +94,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
         api({
           method: "post",
           url: `/emails`,
-          data: {username: usernameToSearch, message: message}
+          data: {username: usernameToSearch, subject: ``, message: message}
         })
       ]).then()
       .catch((error) => console.log(error)); //do nothing

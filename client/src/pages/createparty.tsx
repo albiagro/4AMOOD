@@ -121,7 +121,7 @@ export const CreateParty = ({
             api({
               method: "post",
               url: `/emails`,
-              data: {username: follower.username, message: message}
+              data: {username: follower.username, subject: `4AMood - New party from ${auth.currentUser.username}`, message: message}
             })
           ]).then()
           .catch((error) => console.log(error)); //do nothing
