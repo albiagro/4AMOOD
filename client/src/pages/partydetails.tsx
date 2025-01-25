@@ -98,13 +98,13 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
           <>
             {partyDetails.privateParty && !userPartecipating() ?
           <div>
-          <Alert variant="primary">
+          <Alert variant="danger">
             <Alert.Heading>Ooops! Not authorized</Alert.Heading>
             You are trying to get details about a private party that you are not partecipating in.
             Find the party at page "Find your party" and ask the organizer to approve you!
           </Alert>{" "}
           <br />
-          <Button href="/home">Go to home</Button>
+          <Button href="/findyourparty">Find your party</Button>
         </div> :
             <Row xs={1} md={3} className="g-8">
               <Col>
