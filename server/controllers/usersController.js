@@ -6,24 +6,9 @@ const bcrypt = require("bcrypt");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
 const { sendEmailVerification} = require("../public/assets/emails/emailSender.js");
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const { upload } = require("../public/assets/files/multer.js");
 
 env.config();
-
-// Multer configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '/public/uploads/'));
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // Unique file's name
-  },
-});
-
-const upload = multer({ storage });
 
 var jsonParser = bodyparser.json();
 
