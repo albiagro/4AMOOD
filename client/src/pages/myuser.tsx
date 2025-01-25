@@ -216,7 +216,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
         <Card.Body>
       <Card.Title>Messages </Card.Title>
         <Card.Text>
-          {(notificationsList && notificationsList?.filter(function(not : INotification) {return not.invite === false && not.read === false}).length > 0) ? 
+          {(notificationsList && notificationsList?.filter(function(notification : INotification) {return notification.invite === false && notification.read === false}).length > 0) ? 
         (<ToastContainer className="position-static" >
           {notificationsList?.filter(function(not : INotification) {return not.invite === false && not.read === false}).map((notification : INotification) => (
                 
@@ -241,7 +241,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
       <Card.Title>Partecipation Requests</Card.Title>
         <Card.Text>
 
-        {(notificationsList && notificationsList?.filter(function(not : INotification) {return not.invite && not.read === false}).length > 0) ? 
+        {(notificationsList && notificationsList?.filter(function(notification : INotification) {return notification.invite && notification.read === false}).length > 0) ? 
         (<ToastContainer className="position-static">
           {notificationsList?.filter(function(not : INotification) {return not.invite && not.read === false}).map((notification : INotification) => (
                 

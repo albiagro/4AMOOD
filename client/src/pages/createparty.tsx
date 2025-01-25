@@ -82,6 +82,8 @@ export const CreateParty = ({
       const response = await api.post("/parties", { ...partyData });
       if (response.status === 200) {
 
+        const partyCreated = response.data
+
         // Get users who follows me
      const url = `/users?userFollowed=${auth.currentUser?.username}`
 
@@ -94,17 +96,21 @@ export const CreateParty = ({
         // For each guest, I send a notification of the party created
         response.data.forEach((follower: any) => {
 
-          const message = `User ${auth.currentUser.username} has just created a new party "${title}"! Find it at page "Find your party"`
+          let message = `User ${auth.currentUser.username} has just created a new party "${title}"!" `
 
           const newNotification = {
             userOwner: follower.username,
             datetime: new Date(),
             message: message,
             invite: false,
-            partyID: null,
+            partyID: partyCreated._id,
             userToBeAccepted: null,
             read: false
           }
+
+          // Message for email notification, with link of the party
+
+          message += `Find it here: https://fouramood.netlify.app/${partyCreated._id}`
 
           axios.all([
             api({

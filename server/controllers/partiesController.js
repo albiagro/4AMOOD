@@ -31,7 +31,7 @@ module.exports = function (app) {
       });
       const party = await newParty.save();
 
-      return res.status(200).json({ message: "Party created successfully!" });
+      return res.status(200).json(party);
     } catch (error) {
       return res.status(400).json({ message: error });
     }
