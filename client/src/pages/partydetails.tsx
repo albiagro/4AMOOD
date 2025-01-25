@@ -1,6 +1,6 @@
 import React, {  useEffect, useLayoutEffect, useState} from 'react';
 import { Footer } from '../components/footer';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IMessage, IParty } from './myparties';
 import api from '../axios';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
@@ -15,8 +15,6 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
     setShowNavbar(true);
     // eslint-disable-next-line
   }, [])
-
-  const location = useLocation();
 
   const [partyDetails, setPartyDetails] = useState<IParty | null>(null);
   const [message, setMessage] = useState("");
