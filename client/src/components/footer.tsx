@@ -20,7 +20,6 @@ export const Footer = () => {
                         </Nav>
                     </Col>
                     <Col>
-                        <h5 className="title-footer">Contact us!</h5>
                         <p className="text-footer">Any issue or suggestion? Contact us <NavLink to="/support" className="text-footer">here</NavLink></p>
                     </Col>
                 </Row>
