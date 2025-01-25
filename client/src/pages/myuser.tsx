@@ -109,7 +109,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
     window.location.reload()}
   }
 
-  const avatarImgSrc = auth.currentUser?.sex === "M" ? avatarM : avatarF  
+  const avatarImgSrc = auth.currentUser?.userProfileImagePath ?  auth.currentUser?.userProfileImagePath : (auth.currentUser?.sex === "M" ? avatarM : avatarF)
 
   const props = {disabled : !editMode}
   
