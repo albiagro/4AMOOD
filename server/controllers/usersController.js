@@ -2,18 +2,30 @@ var bodyparser = require("body-parser");
 var urlencodedParser = bodyparser.urlencoded({extended: false});
 var ConnectDB = require("../public/assets/database/DBConnection.js");
 var DBModels = require("../public/assets/database/DBModels.js");
-const {
-  createSecretToken,
-  createRandomToken,
-} = require("../public/assets/token/generateToken.js");
+const {createSecretToken, createRandomToken} = require("../public/assets/token/generateToken.js");
 const bcrypt = require("bcrypt");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
-const { sendEmailVerification, sendGenericEmail } = require("../public/assets/emails/emailSender.js");
+const { sendEmailVerification} = require("../public/assets/emails/emailSender.js");
+const multer = require('multer');
+const path = require('path');
 
 env.config();
 
 ConnectDB();
+
+// Multer configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Folder in which save files
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // Unique file's name
+  },
+});
+
+const upload = multer({ storage });
 
 var jsonParser = bodyparser.json();
 
@@ -98,7 +110,8 @@ module.exports = function (app) {
         password: hashedPassword,
         following: [],
         active: false,
-        validationToken: tokenForEmailValidation
+        validationToken: tokenForEmailValidation,
+        userProfileImagePath: ""
       });
 
       const user = await newUser.save();
@@ -168,6 +181,25 @@ module.exports = function (app) {
     }
   });
 
+  app.post('/users/upload/:username', upload.single('profilePicture'), async (req, res) => {
+    try {
+      const filePath = req.file.path;
+      const usernameToUpdate = req.params.username
+  
+      await DBModels.User.findOneAndUpdate(
+        { username: usernameToUpdate },
+        {
+          userProfileImagePath: filePath
+        }
+      )
+  
+      res.json({ message: 'Image successfully uploaded!'});
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error while uploading image: ' + error });
+    }
+  });
+
   app.get("/user", async (req, res) => {
     const token = req.header("Authorization").split(" ")[1];
 
@@ -226,106 +258,5 @@ module.exports = function (app) {
         return res.status(400).json({ message: error });
       }     
     });
-
-  app.post("/notifications", jsonParser, async function (req, res) {
-    
-    //Default notification for new users
-    const newNotification = new DBModels.Notification({
-      ...req.body
-    })
-
-    await newNotification.save();
-
-  })
-
-  app.get("/notifications", async (req, res) => {
-    const userOwner = req.query.user
-
-    const notifications = await DBModels.Notification.find({userOwner: userOwner});
-
-    res.json(notifications)
-  });
-
-  app.put("/notifications", jsonParser, async function (req, res) {
-    
-    const notificationID = req.query.ID
-
-    // User has read the notification
-    await DBModels.Notification.findOneAndUpdate(
-      { _id: notificationID },
-      {
-        read : true
-      }
-    )
-
-  })
-
-  app.get('/verify/:token', (req, res)=>{
-    const {token} = req.params;
-
-    // Verifying the JWT token 
-    jwt.verify(token, process.env.TOKEN_KEY, async function(err, decoded) {
-        if (err) {
-            return res.json({ message: "Email verification failed, possibly the link is invalid or expired!" });
-        }
-        else {
-          await DBModels.User.findOneAndUpdate(
-            { validationToken: token },
-            { validationToken: "", active: true }
-          )
-          return res.json({ message: "Email verified successfully!" });
-        }
-    });
-});
-
-app.post('/verify/:username', jsonParser, async function (req, res) {
-
-  try {
-    const {username} = req.params;
-
-  const tokenForEmailValidation = createRandomToken();
-
-  // Updating DB in order to check then if token is passed correctly from frontend and so user can be validated
-  await DBModels.User.findOneAndUpdate(
-    { username: username },
-    { validationToken: tokenForEmailValidation}
-  )
-
-  sendEmailVerification(req.body.email, req.body.name, tokenForEmailValidation);
-
-  return res.json({ message: "New verification email sent!" });
-
-  } catch (error) {
-    console.log(error)
-    return res.json({ message: "Error while sending new verification email: " + error });
-  }
-
-});
-
-app.post('/emails', jsonParser, async function (req, res) {
-
-  try {
-
-    // Finding the user with username provided, in order to get his/her email
-    const user = await DBModels.User.findOne({username: req.body.username})
-
-    // Standard email for any email notification, to which I will append the message provided by frontend
-  const messageForEmail = `Hi ${user.name},
-  
-${req.body.message}        
-        
-Kind Regards,
-4AMood Support`
-
-  sendGenericEmail(user.email, req.body.subject, messageForEmail);
-
-  return res.json({ message: "Email sent!" });
-
-  } catch (error) {
-    console.log(error)
-    return res.json({ message: "Error while sending email: " + error });
-  }
-
-});
   
 };

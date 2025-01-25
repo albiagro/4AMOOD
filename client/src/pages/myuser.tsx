@@ -29,6 +29,9 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   const [buttonDescription, setButtonDescription] = useState('Edit')
   const [error, setError] = useState('')
 
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState<string | undefined | null>(null);
+
   const [notificationsList, setNotificationsList] = useState<INotification[] | null>(null);
 
   useEffect(() => {
@@ -49,6 +52,41 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   } 
 
   const dispatch = useDispatch<any>();
+
+  const handleFileChange = (e : any) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+
+    // User's image preview
+    const reader = new FileReader();
+    reader.onloadend = () => setPreview(reader.result?.toString());
+    reader.readAsDataURL(selectedFile);
+  };
+
+  // User's image new image update
+  const handleSubmit = async (e : any) => {
+    e.preventDefault();
+
+    if (!file) {
+      alert('You have not selected any file!');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('profilePicture', file);
+
+    try {
+      const response = await api.post(`/users/upload/${auth.currentUser?.username}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('Image has been successfully loaded!');
+      console.log(response.data);
+    } catch (error) {
+      console.error('Errore while loading users image:', error);
+    }
+  };
 
   const onSubmit = (e : any) => {
     e.preventDefault();
@@ -183,6 +221,12 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
         <Col>
         <Card >
       <Card.Img variant="top" src={avatarImgSrc} />
+      <Form onSubmit={handleSubmit}>
+      <Form.Label style={{color:"black"}}>Update your user profile</Form.Label>
+      <Form.Control type="file" onChange={handleFileChange} accept='image/*'/>
+        {preview && <img src={preview} alt="img-preview" width="100" />}
+        <Button className="btnUser" variant="info" type="submit" size='sm'>Upload</Button>
+      </Form>
       <Card.Body>
       <Card.Title>{auth.currentUser?.username} </Card.Title>
         <Card.Text>
@@ -218,7 +262,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
         <Card.Text>
           {(notificationsList && notificationsList?.filter(function(notification : INotification) {return notification.invite === false && notification.read === false}).length > 0) ? 
         (<ToastContainer className="position-static" >
-          {notificationsList?.filter(function(not : INotification) {return not.invite === false && not.read === false}).map((notification : INotification) => (
+          {notificationsList?.filter(function(notification : INotification) {return notification.invite === false && notification.read === false}).map((notification : INotification) => (
                 
                     <Toast style={{ width: '100%' }}>
                     <Toast.Header className='toastHeader'>
@@ -243,7 +287,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
 
         {(notificationsList && notificationsList?.filter(function(notification : INotification) {return notification.invite && notification.read === false}).length > 0) ? 
         (<ToastContainer className="position-static">
-          {notificationsList?.filter(function(not : INotification) {return not.invite && not.read === false}).map((notification : INotification) => (
+          {notificationsList?.filter(function(notification : INotification) {return notification.invite && notification.read === false}).map((notification : INotification) => (
                 
                     <Toast style={{ width: '100%' }}>
                     <Toast.Header>

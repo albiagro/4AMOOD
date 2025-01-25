@@ -12,6 +12,7 @@ var userSchema = new mongoose.Schema({
     following: Array,
     validationToken: String,
     active: Boolean,
+    userProfileImagePath: String,
 });
 
 //Party schema and model

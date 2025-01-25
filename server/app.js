@@ -2,12 +2,14 @@ var express = require('express');
 var usersController = require('./controllers/usersController');
 const env = require("dotenv");
 const partiesController = require('./controllers/partiesController');
+const notificationsController = require('./controllers/notificationsController');
 env.config();
 
 var app = express();
 
 //static files
 app.use(express.static('./public'));
+app.use('/uploads', express.static('uploads'));
 
 app.use(function(req, res, next) {
     // res.header("Access-Control-Allow-Origin", "*");
@@ -22,9 +24,10 @@ app.use(function(req, res, next) {
     next();
   });
 
-//fire controller
+//fire controllers
 usersController(app);
 partiesController(app);
+notificationsController(app);
 
 //listen to port
 app.listen(5000);
