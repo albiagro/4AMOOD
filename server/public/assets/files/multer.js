@@ -1,17 +1,21 @@
-const multer = require('multer');
-const path = require('path');
+const aws = require('aws-sdk');
+const multerS3 = require('multer-s3');
 
-// Multer configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '/uploads/'));
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // Unique file's name
-  },
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_ACCESS_KEY,
+  region: process.env.AWS_REGION,
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage: multerS3({
+    s3,
+    bucket: '4amood-uploads--eun1-az1--x-s3',
+    key: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      cb(null, `uploads/${uniqueSuffix}${path.extname(file.originalname)}`);
+    },
+  }),
+});
 
 module.exports = {upload}
