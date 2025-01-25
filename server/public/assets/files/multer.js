@@ -10,7 +10,7 @@ const s3 = new aws.S3({
 const upload = multer({
   storage: multerS3({
     s3,
-    bucket: '4amood-uploads--eun1-az1--x-s3',
+    bucket: '4amood-uploads',
     key: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       cb(null, `uploads/${uniqueSuffix}${path.extname(file.originalname)}`);
