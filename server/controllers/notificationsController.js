@@ -1,5 +1,4 @@
 var bodyparser = require("body-parser");
-var ConnectDB = require("../public/assets/database/DBConnection.js");
 var DBModels = require("../public/assets/database/DBModels.js");
 const {createRandomToken} = require("../public/assets/token/generateToken.js");
 const env = require("dotenv");
@@ -7,8 +6,6 @@ const jwt = require("jsonwebtoken");
 const { sendEmailVerification, sendGenericEmail } = require("../public/assets/emails/emailSender.js");
 
 env.config();
-
-ConnectDB();
 
 var jsonParser = bodyparser.json();
 

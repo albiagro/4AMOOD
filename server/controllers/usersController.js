@@ -1,6 +1,5 @@
 var bodyparser = require("body-parser");
 var urlencodedParser = bodyparser.urlencoded({extended: false});
-var ConnectDB = require("../public/assets/database/DBConnection.js");
 var DBModels = require("../public/assets/database/DBModels.js");
 const {createSecretToken, createRandomToken} = require("../public/assets/token/generateToken.js");
 const bcrypt = require("bcrypt");
@@ -13,21 +12,15 @@ const fs = require('fs');
 
 env.config();
 
-ConnectDB();
-
 // Multer configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-
-    const uploadDir = path.resolve(__dirname, '/uploads');
-  if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-    cb(null, uploadDir); // Folder in which save files
+    const uploadPath = path.resolve(__dirname, '../uploads');
+    cb(null, uploadPath); // Cartella dove salvare le immagini
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // Unique file's name
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // Nome univoco del file
   },
 });
 

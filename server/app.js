@@ -1,9 +1,13 @@
 var express = require('express');
-var usersController = require('./controllers/usersController');
+
 const env = require("dotenv");
+env.config();
+
+var ConnectDB = require("../public/assets/database/DBConnection.js");
+var usersController = require('./controllers/usersController');
 const partiesController = require('./controllers/partiesController');
 const notificationsController = require('./controllers/notificationsController');
-env.config();
+
 
 var app = express();
 
@@ -23,6 +27,8 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
     next();
   });
+
+ConnectDB();
 
 //fire controllers
 usersController(app);
