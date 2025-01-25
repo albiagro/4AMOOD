@@ -15,11 +15,12 @@ env.config();
 // Multer configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads/'); // folder where to save images
+    const uploadPath = path.resolve(__dirname, './uploads'); // Absolute folder
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname)); // unique file's name
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // Unique file's name
   },
 });
 
