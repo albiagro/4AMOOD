@@ -220,11 +220,10 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
     <Row xs={1} md={3} className="g-8">
         <Col>
         <Card >
-      <Card.Img variant="top" src={avatarImgSrc} />
+      <Card.Img variant="top" src={avatarImgSrc} style={{maxHeight:"350px"}} />
       <Form onSubmit={handleSubmit}>
-      <Form.Label style={{color:"black"}}>Update your user profile</Form.Label>
       <Form.Control type="file" onChange={handleFileChange} accept='image/*'/>
-        <Button className="btnUser" variant="info" type="submit" size='sm'>Upload</Button>
+        <Button className="btnUser" variant="info" type="submit" size='sm'>Change image</Button>
       </Form> 
       <Card.Body>
       <Card.Title>{auth.currentUser?.username} </Card.Title>

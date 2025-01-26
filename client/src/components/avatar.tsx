@@ -7,7 +7,7 @@ export const Avatar = () => {
 
     const auth = useSelector((state: any) => state.auth) 
 
-    const avatarImgSrc = auth.currentUser?.sex === "M" ? avatarM : avatarF    
+    const avatarImgSrc = auth.currentUser?.userProfileImagePath ?  auth.currentUser?.userProfileImagePath : (auth.currentUser?.sex === "M" ? avatarM : avatarF)
 
     return (
         <div>
