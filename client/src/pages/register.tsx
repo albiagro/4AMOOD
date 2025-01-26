@@ -28,6 +28,9 @@ export const Register = ({
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Default value in order to hide password
+  const [inputPasswordType, setInputPasswordType] = useState("password")
+
   const dispatch = useDispatch<any>();
 
   const onRegister = (e: any) => {
@@ -47,6 +50,7 @@ export const Register = ({
   return (
     <div>
       <div className="backgroundContainer">
+        <br />
       {/* If user is logged in, redirect to homepage */}
       {auth.currentUser && (
         <>
@@ -70,7 +74,8 @@ export const Register = ({
       <Form.Label>Username</Form.Label>
       <Form.Control type="input" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}/>
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+        <Form.Control type={inputPasswordType} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+        <Form.Check type="checkbox" inline label="Show password" id="default-checkbox" onChange={() => inputPasswordType === "password" ? setInputPasswordType("text") : setInputPasswordType("password")}/>
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}/>

@@ -51,6 +51,7 @@ useLayoutEffect(() => {
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
       <Card className="myCard" bg="info">
       <Card.Body>
         <Card.Title>

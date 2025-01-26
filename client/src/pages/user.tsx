@@ -107,6 +107,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
   return (
     <div>
     <div className="backgroundContainer">
+    <br />
       {userDetails ? 
       <Container>
     <Card id='otherUserCard'>

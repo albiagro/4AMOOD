@@ -15,6 +15,7 @@ export const Home = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
       <Container>
       {auth.currentUser ? <Alert variant="primary">
       <Alert.Heading>Hey, {auth.currentUser.username}, Welcome back to <b>4AMood</b>! 🎉</Alert.Heading>

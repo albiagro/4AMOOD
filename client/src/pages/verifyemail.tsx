@@ -32,6 +32,7 @@ export const VerifyEmail = ({setShowNavbar} : {setShowNavbar : React.Dispatch<Re
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
         <Container>
           {message && (
             <div>

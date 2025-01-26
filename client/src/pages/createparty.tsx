@@ -139,6 +139,7 @@ export const CreateParty = ({
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
         <Container>
           <Form onSubmit={onCreate}>
             <Form.Group className="mb-3" controlId="basicData">

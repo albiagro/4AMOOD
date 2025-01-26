@@ -93,6 +93,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
         {partyDetails && 
           <>
             {partyDetails.privateParty && !userPartecipating() ?

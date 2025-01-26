@@ -210,6 +210,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
       {/* If user is not logged in anymore, redirect to homepage */}
       {!auth.currentUser && (
         <>

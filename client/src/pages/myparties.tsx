@@ -131,6 +131,7 @@ export const MyParties = ({
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
       <Container>
       <Alert variant="primary" >
         <Alert.Heading>

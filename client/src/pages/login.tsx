@@ -41,6 +41,7 @@ export const Login = ({
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
       {/* If user is logged in, redirect to homepage */}
       {auth.currentUser && (
         <>

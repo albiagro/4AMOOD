@@ -152,6 +152,7 @@ function toDegrees(radians: number): number {
   return (
     <div >
       <div className="backgroundContainer">
+      <br />
       <Container>
         <Form onSubmit={onSearch}>
           <FormGroup className="mb-2" >

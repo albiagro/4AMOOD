@@ -12,6 +12,7 @@ export const About = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Se
   return (
     <div>
       <div className="backgroundContainer">
+      <br />
       <Container>
       <Alert variant="primary">
       <Alert.Heading>About 4AMood: Find Your Party</Alert.Heading>
