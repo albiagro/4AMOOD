@@ -17,6 +17,7 @@ interface IUser {
   password: String,
   email: String
   following: String[]
+  userProfileImagePath: string
 }
 
 export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
@@ -35,7 +36,7 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
 
   const [follow, setFollow] = useState(isCurrentUserFollowing)
 
-  const avatarImgSrc = userDetails?.sex === "M" ? avatarM : avatarF 
+  const avatarImgSrc = userDetails?.userProfileImagePath ? userDetails.userProfileImagePath : (userDetails?.sex === "M" ? avatarM : avatarF)
 
   useEffect(() => {
     getUserDetails();

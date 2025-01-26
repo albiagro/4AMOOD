@@ -1,12 +1,10 @@
 import React, {  useEffect, useLayoutEffect, useState} from 'react';
 import { Footer } from '../components/footer';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IMessage, IParty } from './myparties';
+import {IMessage, IParty } from './myparties';
 import api from '../axios';
 import { Alert, Button, Card, Col, Form, Row } from 'react-bootstrap';
 import partyImg from '../img/party.jpg'
-import avatarM from '../img/avatarM.png'
-import avatarF from '../img/avatarF.png'
 import { useSelector } from 'react-redux';
 
 export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
@@ -140,9 +138,7 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
                     </Card.Title>
                     <Card.Text className='scroll'>
                       {partyDetails?.guests.map((guest) => (
-                        <>    
-                        {guest.sex === 'M' ? <img src={avatarM} alt='guestAvatar' height="30" width="30"/>
-                        : <img src={avatarF} alt='guestAvatar' height="30" width="30"/>}
+                        <>
                         <Button onClick={() => redirectToGuestPage(guest.username)} variant="info" size="sm">{guest.username}</Button><span className='separator'> </span>
                         </>))}
                     </Card.Text>
