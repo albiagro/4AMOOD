@@ -210,7 +210,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   return (
     <div>
       <div className="backgroundContainer">
-      <br />
+        <br />
       {/* If user is not logged in anymore, redirect to homepage */}
       {!auth.currentUser && (
         <>
@@ -255,7 +255,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
     </Card>
         </Col>
         <Col>
-        <Card className="notificationCard">
+        <Card>
         <Card.Body>
       <Card.Title>Messages </Card.Title>
         <Card.Text>
@@ -279,7 +279,7 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
           </Card>
         </Col>
         <Col>
-        <Card className="notificationCard">
+        <Card>
         <Card.Body>
       <Card.Title>Partecipation Requests</Card.Title>
         <Card.Text>
