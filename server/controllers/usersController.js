@@ -166,13 +166,14 @@ module.exports = function (app) {
 
   app.post('/users/upload/:username', upload.single('profilePicture'), async (req, res) => {
     try {
-      const filePath = req.file.path;
+      // response from upload.single which is the file location of the uploaded file
+      const imageUrl = req.file.location;
       const usernameToUpdate = req.params.username
   
       await DBModels.User.findOneAndUpdate(
         { username: usernameToUpdate },
         {
-          userProfileImagePath: filePath
+          userProfileImagePath: imageUrl
         }
       )
   
