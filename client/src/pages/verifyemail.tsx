@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState} from 'react';
 import { Footer } from '../components/footer';
 import { Alert, Button, Container } from 'react-bootstrap';
 import api from '../axios';
+import SEO from '../components/SEO';
 
 export const VerifyEmail = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -31,6 +32,12 @@ export const VerifyEmail = ({setShowNavbar} : {setShowNavbar : React.Dispatch<Re
   
   return (
     <div>
+      <SEO 
+        title= '4AMood | Email verification'
+        description='Email verification'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
         <Container>

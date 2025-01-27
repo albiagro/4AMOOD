@@ -19,7 +19,7 @@ return (
 <meta name="twitter:card" content={type} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="google-adsense-account" content="ca-pub-8373910532445865"></meta>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8373910532445865" crossOrigin="anonymous"></script>
 { /* End Twitter tags */ }
 </Helmet>
 )
