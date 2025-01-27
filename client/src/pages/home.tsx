@@ -2,6 +2,7 @@ import React, { useLayoutEffect} from 'react';
 import { Footer } from '../components/footer';
 import { Alert, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import PrivacyBanner from '../components/privacy';
 
 export const Home = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -50,6 +51,7 @@ export const Home = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
     </p>
   </Alert>}
       </Container>
+      <PrivacyBanner />
       </div>
      <Footer />
      </div>
