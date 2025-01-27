@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Footer } from '../components/footer';
 import { Button, Card, Form } from 'react-bootstrap';
+import SEO from '../components/SEO';
 
 export const Support = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -50,6 +51,12 @@ useLayoutEffect(() => {
 
   return (
     <div>
+      <SEO 
+        title= '4AMood | Contact us'
+        description='Any issue or suggestion for us? Contact 4AMood support!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
       <Card className="myCard" bg="info">

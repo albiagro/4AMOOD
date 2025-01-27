@@ -4,6 +4,7 @@ import { login } from "../store/reducers/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { Footer } from "../components/footer";
+import SEO from "../components/SEO";
 
 export const Login = ({
   setShowNavbar,
@@ -40,6 +41,12 @@ export const Login = ({
 
   return (
     <div>
+      <SEO 
+        title= '4AMood | Login'
+        description="Welcome back! Let's login to 4AMood!"
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
       {/* If user is logged in, redirect to homepage */}

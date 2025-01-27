@@ -3,6 +3,7 @@ import { Footer } from '../components/footer';
 import { Alert, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import PrivacyBanner from '../components/privacy';
+import SEO from '../components/SEO';
 
 export const Home = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -15,6 +16,12 @@ export const Home = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
   
   return (
     <div>
+      <SEO 
+        title= '4AMood | Homepage'
+        description='Your ultimate hub for unforgettable parties and social connections is here!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
       <Container>

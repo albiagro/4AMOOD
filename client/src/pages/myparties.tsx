@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Party } from "../components/party";
 import { Footer } from "../components/footer";
 import api from "../axios";
+import SEO from "../components/SEO";
 
 export interface IParty {
   _id: String;
@@ -130,6 +131,12 @@ export const MyParties = ({
 
   return (
     <div>
+      <SEO 
+        title= '4AMood | My parties'
+        description='Keep updated when your parties are planned, in order to not miss them!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
       <Container>

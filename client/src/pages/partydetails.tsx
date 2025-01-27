@@ -6,6 +6,7 @@ import api from '../axios';
 import { Alert, Button, Card, Col, Form, Row } from 'react-bootstrap';
 import partyImg from '../img/party.jpg'
 import { useSelector } from 'react-redux';
+import SEO from '../components/SEO';
 
 export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -92,6 +93,12 @@ export const PartyDetails = ({setShowNavbar} : {setShowNavbar : React.Dispatch<R
   
   return (
     <div>
+      <SEO 
+        title= '4AMood | Party details'
+        description='Find all details about this party and connect with other 4AMooders!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
         {partyDetails && 

@@ -17,6 +17,7 @@ import { User } from './pages/user';
 import { Support } from './pages/support';
 import { About } from './pages/about';
 import { VerifyEmail } from './pages/verifyemail';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
 
@@ -29,10 +30,11 @@ function App() {
 
   const auth = useSelector((state: any) => state.auth)
 
-  //TODO: when user is logged out, redirect to home - now route is not triggered because it exists only if user is logged in!
+  const helmetContext = {};
 
   return (
     <div className="App">
+      <HelmetProvider context={helmetContext}>
       <BrowserRouter>
       {showNavbar && <MyNavBar />}
         <Routes>
@@ -52,6 +54,7 @@ function App() {
           <Route path="*" element={<Home setShowNavbar={setShowNavbar} />} />
         </Routes>
       </BrowserRouter>
+      </HelmetProvider>
     </div>
   );
 }

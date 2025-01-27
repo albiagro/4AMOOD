@@ -7,6 +7,7 @@ import { IGuest } from "./myparties";
 import api from "../axios";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import axios from "axios";
+import SEO from "../components/SEO";
 
 export const CreateParty = ({
   setShowNavbar,
@@ -138,6 +139,12 @@ export const CreateParty = ({
 
   return (
     <div>
+      <SEO 
+        title= '4AMood | Create your party'
+        description='Create thrilling parties and share them with your friends!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
         <Container>

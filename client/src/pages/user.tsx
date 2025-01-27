@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { Alert, Button, Card, Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import SEO from '../components/SEO';
 
 interface IUser {
   name: String,
@@ -106,6 +107,12 @@ export const User = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Set
 
   return (
     <div>
+      <SEO 
+        title= {`4AMood | ${userDetails?.username}`}
+        description='Find details about this user or start following him/her!'
+        name='4AMood'
+        type='website'
+        />
     <div className="backgroundContainer">
     <br />
       {userDetails ? 

@@ -9,6 +9,7 @@ import { Footer } from '../components/footer';
 import { INotification } from './myparties';
 import axios from 'axios';
 import api from '../axios';
+import SEO from '../components/SEO';
 
 export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -209,6 +210,12 @@ export const MyUser = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.S
   
   return (
     <div>
+      <SEO 
+        title= '4AMood | My profile'
+        description='View your profile, edit your personal information, read messages and invites!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
         <br />
       {/* If user is not logged in anymore, redirect to homepage */}

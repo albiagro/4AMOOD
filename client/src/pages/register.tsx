@@ -4,6 +4,7 @@ import { register } from "../store/reducers/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { Footer } from "../components/footer";
+import SEO from "../components/SEO";
 
 export const Register = ({
   setShowNavbar,
@@ -49,6 +50,12 @@ export const Register = ({
 
   return (
     <div>
+      <SEO 
+        title= '4AMood | Register'
+        description='Start your incredible journey with 4AMood and register your profile now!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
         <br />
       {/* If user is logged in, redirect to homepage */}

@@ -1,6 +1,7 @@
 import React, { useLayoutEffect} from 'react';
 import { Footer } from '../components/footer';
 import { Alert, Container } from 'react-bootstrap';
+import SEO from '../components/SEO';
 
 export const About = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -11,6 +12,12 @@ export const About = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.Se
   
   return (
     <div>
+      <SEO 
+        title= '4AMood | About'
+        description='Find more details about the history of 4AMood!'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
       <Container>

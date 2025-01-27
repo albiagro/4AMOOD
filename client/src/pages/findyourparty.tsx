@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Party } from '../components/party';
 import { Footer } from '../components/footer';
 import api from '../axios';
+import SEO from '../components/SEO';
 
 export const FindYourParty = ({setShowNavbar} : {setShowNavbar : React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -151,6 +152,12 @@ function toDegrees(radians: number): number {
   
   return (
     <div >
+      <SEO 
+        title= '4AMood | Find your party'
+        description='Are you really ready to start partying?'
+        name='4AMood'
+        type='website'
+        />
       <div className="backgroundContainer">
       <br />
       <Container>
