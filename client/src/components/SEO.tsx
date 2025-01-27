@@ -19,7 +19,18 @@ return (
 <meta name="twitter:card" content={type} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8373910532445865" crossOrigin="anonymous"></script>
+<script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
+        <script>
+          {`
+            (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8373910532445865",
+              enable_page_level_ads: true
+            });
+          `}
+        </script>
 { /* End Twitter tags */ }
 </Helmet>
 )
