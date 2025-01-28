@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Pagine principali -->
+  <url>
+    <loc>https://fouramood.netlify.app/</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/home</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/login</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/register</loc>
+  </url>
+  
+  <!-- Pagine utente (utente loggato) -->
+  <url>
+    <loc>https://fouramood.netlify.app/user/:username</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/myparties</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/createparty</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/findyourparty</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/parties/:partyID</loc>
+  </url>
+
+  <!-- Visualizzazione utenti -->
+  <url>
+    <loc>https://fouramood.netlify.app/users/*</loc>
+  </url>
+  
+  <!-- Altre pagine -->
+  <url>
+    <loc>https://fouramood.netlify.app/about</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/support</loc>
+  </url>
+  <url>
+    <loc>https://fouramood.netlify.app/verify/*</loc>
+  </url>
+
+</urlset>
