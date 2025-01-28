@@ -1,1 +1,12 @@
-# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /login
+Disallow: /register
+Disallow: /user/*
+Disallow: /myparties
+Disallow: /createparty
+Disallow: /parties/*
+Disallow: /verify/*
+
+Allow: /
+
+Sitemap: https://fouramood.netlify.app/sitemap.xml
