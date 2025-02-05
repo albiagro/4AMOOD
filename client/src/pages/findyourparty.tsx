@@ -188,7 +188,7 @@ function toDegrees(radians: number): number {
         {partiesList?.map((party) => (
           <Col >
             <br />
-            <Party party={party} displayMode={auth.currentUser?.username == null} organizedByMe={false} partecipating={userPartecipating(party)} userToBeAccepted={userToBeAccepted(party.guests)}/>
+            <Party party={party} displayMode={auth.currentUser == null} organizedByMe={false} partecipating={userPartecipating(party)} userToBeAccepted={userToBeAccepted(party.guests)}/>
           </Col>
         ))}
       </Row>) : (

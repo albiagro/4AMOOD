@@ -179,7 +179,7 @@ export const Party = (props: Props) => {
   }
 
   // If I'm clicking to the link of username but it's myself, I will not show the user page, but the myuser page
-  const urlToRedirect = party.userOrganizer === auth.currentUser.username ? `/user/${auth.currentUser.username}` : `/users/${party.userOrganizer}`
+  const urlToRedirect = party.userOrganizer === auth.currentUser ? `/user/${auth.currentUser.username}` : `/users/${party.userOrganizer}`
 
   const redirectToUserPage = () => {
     navigate(urlToRedirect, {state:{user: party.userOrganizer}})
