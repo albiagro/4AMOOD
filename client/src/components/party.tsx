@@ -12,7 +12,9 @@ interface Props {
     //Only if not organized by me, I show the button "I will partecipate in"
     organizedByMe : boolean,
     partecipating: boolean,
-    userToBeAccepted: boolean
+    userToBeAccepted: boolean,
+    // For users not logged in
+    displayMode: boolean
 }
 
 export const Party = (props: Props) => {
@@ -193,11 +195,13 @@ export const Party = (props: Props) => {
           Date: <b>{party.date.toLocaleString().split('T')[0]}</b> <br />
           Category: <b>{party.category}</b> <br />
           State: <b>{party.state}</b> <br />
-        </Card.Text>        
+        </Card.Text> 
+        {!props.displayMode &&    
+        <>    
         {!props.organizedByMe && sectionPartecipate}
         <br />
         <Button disabled={getAccessToPartyDetails()} onClick={() => openPartyDetails()} variant="info">More details</Button>
-        {props.organizedByMe && <><span className='separator'> </span><Button onClick={() => cancelParty()} variant="outline-danger">Delete</Button></>}
+        {props.organizedByMe && <><span className='separator'> </span><Button onClick={() => cancelParty()} variant="outline-danger">Delete</Button></>}</>}
       </Card.Body>
     </Card>
   );

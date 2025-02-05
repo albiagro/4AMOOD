@@ -168,7 +168,7 @@ export const MyParties = ({
         {partiesListOrganizedByMe?.map((party) => (
           <Col>
             <br />
-            <Party party={party} organizedByMe={true} partecipating={true} userToBeAccepted= {false}/>
+            <Party party={party} displayMode={false} organizedByMe={true} partecipating={true} userToBeAccepted= {false}/>
           </Col>
         ))}
       </Row>) : (
@@ -196,7 +196,7 @@ export const MyParties = ({
         {partiesListMeAsAGuest?.map((party) => (
           <Col>
             <br />
-            <Party party={party} organizedByMe={false} partecipating={userPartecipating(party)} userToBeAccepted= {userToBeAccepted(party.guests)}/>
+            <Party party={party} displayMode={false} organizedByMe={false} partecipating={userPartecipating(party)} userToBeAccepted= {userToBeAccepted(party.guests)}/>
           </Col>
         ))}
       </Row> ) : (
