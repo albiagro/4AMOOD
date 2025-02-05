@@ -12,7 +12,6 @@ const notificationsController = require('./controllers/notificationsController')
 var app = express();
 
 //static files
-app.use(express.static('./public'));
 app.use(express.static(__dirname));
 
 app.use(function(req, res, next) {

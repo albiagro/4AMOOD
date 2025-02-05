@@ -1,12 +1,12 @@
 var bodyparser = require("body-parser");
 var urlencodedParser = bodyparser.urlencoded({extended: false});
-var DBModels = require("../public/assets/database/DBModels.js");
-const {createSecretToken, createRandomToken} = require("../public/assets/token/generateToken.js");
+var DBModels = require("../helpers/database/DBModels.js");
+const {createSecretToken, createRandomToken} = require("../helpers/token/generateToken.js");
 const bcrypt = require("bcrypt");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
-const { sendEmailVerification} = require("../public/assets/emails/emailSender.js");
-const { upload } = require("../public/assets/files/multer.js");
+const { sendEmailVerification} = require("../helpers/emails/emailSender.js");
+const { upload } = require("../helpers/files/multer.js");
 
 env.config();
 

@@ -1,6 +1,6 @@
 var bodyparser = require("body-parser");
 var urlencodedParser = bodyparser.urlencoded({extended: false});
-var DBModels = require("../public/assets/database/DBModels.js");
+var DBModels = require("../helpers/database/DBModels.js");
 
 var jsonParser = bodyparser.json();
 

@@ -1,9 +1,9 @@
 var bodyparser = require("body-parser");
-var DBModels = require("../public/assets/database/DBModels.js");
-const {createRandomToken} = require("../public/assets/token/generateToken.js");
+var DBModels = require("../helpers/database/DBModels.js");
+const {createRandomToken} = require("../helpers/token/generateToken.js");
 const env = require("dotenv");
 const jwt = require("jsonwebtoken");
-const { sendEmailVerification, sendGenericEmail } = require("../public/assets/emails/emailSender.js");
+const { sendEmailVerification, sendGenericEmail } = require("../helpers/emails/emailSender.js");
 
 env.config();
 
