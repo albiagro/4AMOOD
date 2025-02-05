@@ -43,9 +43,9 @@ function App() {
           <Route path="/login" element={<Login setShowNavbar={setShowNavbar} />} />
           <Route path="/register" element={<Register setShowNavbar={setShowNavbar} />} />
           <Route path={`/user/${auth.currentUser?.username}`} element={<MyUser setShowNavbar={setShowNavbar} />} /> 
+          <Route path="/findyourparty" element={<FindYourParty setShowNavbar={setShowNavbar} />} />
           {auth.currentUser && <><Route path="/myparties" element={<MyParties setShowNavbar={setShowNavbar} />} /> </> }
-          {auth.currentUser && <><Route path="/createparty" element={<CreateParty setShowNavbar={setShowNavbar} />} /> </> }
-          {auth.currentUser && <><Route path="/findyourparty" element={<FindYourParty setShowNavbar={setShowNavbar} />} /> </> }
+          {auth.currentUser && <><Route path="/createparty" element={<CreateParty setShowNavbar={setShowNavbar} />} /> </> }        
           {auth.currentUser && <><Route path="/parties/:partyID" element={<PartyDetails setShowNavbar={setShowNavbar} />} /> </> }
           {auth.currentUser && <><Route path={`/users/*`} element={<User setShowNavbar={setShowNavbar} />} />  </> }
           <Route path="/about" element={<About setShowNavbar={setShowNavbar} />} />

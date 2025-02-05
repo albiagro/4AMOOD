@@ -34,6 +34,9 @@ export const MyNavBar = () => {
             <Nav.Link href="/home">
               <p className="links"> Home </p>
             </Nav.Link>
+            <Nav.Link href="/findyourparty">
+              <p className="links"> Find your party </p>
+            </Nav.Link>
             {auth.currentUser === null ? 
               <>
                 <Nav.Link href="/login">
@@ -43,10 +46,7 @@ export const MyNavBar = () => {
                   <p className="links"> Register </p>
                 </Nav.Link>
               </> :
-              <>
-              <Nav.Link href="/findyourparty">
-              <p className="links"> Find your party </p>
-            </Nav.Link>
+              <>              
             <Nav.Link href="/myparties">
               <p className="links"> My parties </p>
             </Nav.Link>
