@@ -196,7 +196,10 @@ export const Party = (props: Props) => {
           Category: <b>{party.category}</b> <br />
           State: <b>{party.state}</b> <br />
         </Card.Text> 
-        {!props.displayMode &&    
+        {props.displayMode ?
+         <>
+        <i>You need to log in to see more details. </i>
+         </> :
         <>    
         {!props.organizedByMe && sectionPartecipate}
         <br />
