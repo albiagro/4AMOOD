@@ -193,7 +193,7 @@ function toDegrees(radians: number): number {
         ))}
       </Row>) : (
       <Spinner animation="border" variant="info" />)}
-      </Container>
+      </Container> <br />
       </div>
     <Footer />
     </div>
