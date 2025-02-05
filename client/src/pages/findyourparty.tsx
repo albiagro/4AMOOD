@@ -45,7 +45,10 @@ export const FindYourParty = ({setShowNavbar} : {setShowNavbar : React.Dispatch<
     e.preventDefault();
     setLoading(true);
 
-    const url = `/parties?currentUser=${auth.currentUser?.username}&minLat=${boundingBox.minLat}&maxLat=${boundingBox.maxLat}&minLon=${boundingBox.minLon}&maxLon=${boundingBox.maxLon}&date=${date}&category=${category}`
+    // if user is not logged in...
+    const userNameLoggedIn = auth.currentUser?.username ? auth.currentUser?.username : ""
+
+    const url = `/parties?currentUser=${userNameLoggedIn}&minLat=${boundingBox.minLat}&maxLat=${boundingBox.maxLat}&minLon=${boundingBox.minLon}&maxLon=${boundingBox.maxLon}&date=${date}&category=${category}`
 
     api({
       method: "get",
