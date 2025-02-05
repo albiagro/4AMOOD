@@ -3,7 +3,7 @@ var express = require('express');
 const env = require("dotenv");
 env.config();
 
-var ConnectDB = require("./public/assets/database/DBConnection.js");
+var ConnectDB = require("./helpers/database/DBConnection.js");
 var usersController = require('./controllers/usersController');
 const partiesController = require('./controllers/partiesController');
 const notificationsController = require('./controllers/notificationsController');
