@@ -34,6 +34,10 @@ usersController(app);
 partiesController(app);
 notificationsController(app);
 
+app.get("/", (req, res) => {
+  res.send("Server is active! 🚀");
+});
+
 //listen to port
 app.listen(5000);
 console.log('You are listening to port 5000.');
